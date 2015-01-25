@@ -65,8 +65,9 @@ The state table is very straightforward:
 | states                |
 +-----------------------+
 | id:int                |
-| state:int             |
 | device_id:foreign_key |
+| state:int             |
+| source:string         |
 | created_at:time       |
 +-----------------------+
 ```
