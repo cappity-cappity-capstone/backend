@@ -55,7 +55,6 @@ describe Cappy::Models::Device do
           context 'and the last_check_in is not nil' do
             it 'is valid' do
               expect(subject).to be_valid
-              subject.save!
             end
           end
         end
