@@ -52,6 +52,14 @@ describe Cappy::Models::Device do
             end
           end
 
+          context 'but the last_check_in is before created_at' do
+            let(:last_check_in) { created_at - 1 }
+
+            it 'is not valid' do
+              expect(subject).to_not be_valid
+            end
+          end
+
           context 'and the last_check_in is not nil' do
             it 'is valid' do
               expect(subject).to be_valid
