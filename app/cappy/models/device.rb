@@ -3,7 +3,7 @@ module Cappy
     # This model represents a connected device
     class Device < ActiveRecord::Base
       self.table_name = 'devices'
-      
+
       validates :device_id,     presence: true
       validates :name,          presence: true
       validates :device_type,   presence: true
