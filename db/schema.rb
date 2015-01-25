@@ -11,14 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124173216) do
-
-  create_table "locks", force: :cascade do |t|
-    t.string  "name",      null: false
-    t.string  "device_id", null: false
-    t.boolean "status",    null: false
-  end
-
-  add_index "locks", ["device_id"], name: "index_locks_on_device_id"
+ActiveRecord::Schema.define(version: 20150125165223) do
 
 end
