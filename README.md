@@ -18,3 +18,57 @@ bundle exec rake
 
 All development tasks for this application are handled through the Rakefile.
 To see a complete listing, run `bundle exec rake -T`.
+
+## Schema
+
+For the different modules, we'll be using two tables: `devices` and `states`.
+`devices` represent the actual modules that are connected, while `states` represent the state of each module.
+
+### `device`
+
+Here's the basic structure of the devices table:
+
+```
++--------------------+
+| devices            |
++--------------------+
+| id:int             |
+| device_id:string   |
+| name:string        |
+| type:string        |
+| last_check_in:time |
+| created_at:time    |
+| updated_at:time    |
++--------------------+
+```
+
+Things to note:
+
+* `device_id` is the unique id that is reported by the module
+* `name` is an optional string that is set by the user
+* `type` should be enforced to be one of the following:
+  * `lock`
+  * `outlet`
+  * `gas_valve`
+  * `airbourne_alert`
+* `last_check_in` is the time that ccs last interacted with the module.
+
+
+The device `has_many` `states`, which is described below.
+
+### `states`
+
+The state table is very straightforward:
+
+```
++-----------------------+
+| states                |
++-----------------------+
+| id:int                |
+| state:int             |
+| device_id:foreign_key |
+| created_at:time       |
++-----------------------+
+```
+
+There should be an index on the `device_id` column to enable quick searching.
