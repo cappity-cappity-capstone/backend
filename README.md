@@ -51,7 +51,7 @@ Things to note:
   * `outlet`
   * `gas_valve`
   * `airbourne_alert`
-* `last_check_in` is the time tha ccs last interacted with the module.
+* `last_check_in` is the time that ccs last interacted with the module.
 
 
 The device `has_many` `states`, which is described below.
