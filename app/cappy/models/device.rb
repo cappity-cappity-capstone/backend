@@ -3,10 +3,11 @@ module Cappy
     # This model represents a connected device
     class Device < ActiveRecord::Base
       self.table_name = 'devices'
+      valid_device_types = %w(lock outlet gas_valve airbourne_alert)
 
       validates :device_id,     presence: true
       validates :name,          presence: true
-      validates :device_type,   presence: true
+      validates :device_type,   presence: true, inclusion: { in: valid_device_types }
       validates :last_check_in, presence: true
       validates :created_at,    presence: true
       validates :updated_at,    presence: true

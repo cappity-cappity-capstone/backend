@@ -10,6 +10,8 @@ describe Cappy::Models::Device do
     let(:created_at)    { DateTime.now - 1 }
     let(:updated_at)    { DateTime.now - 1 }
 
+    valid_types = %w{lock outlet gas_valve airbourne_alert}
+
     subject { described_class.new(device_id: device_id,
                                   name: name, 
                                   device_type: device_type,
@@ -43,7 +45,25 @@ describe Cappy::Models::Device do
           end
         end
 
-        context 'and the device_type is not nil' do          
+        context 'and the device_type is not nil' do
+          context 'but the device_type is an invalid value' do
+            let(:device_type) { "new_type" }
+
+            it 'is not valid' do
+              expect(subject).to_not be_valid
+            end
+          end
+
+          context 'and the device_type is a valid value' do
+            valid_types.each do |d_t|
+              let(:device_type) { d_t }
+
+              it 'is valid' do
+                expect(subject).to be_valid
+              end
+            end
+          end
+
           context 'but the last_check_in is nil' do
             let(:last_check_in) { nil }
 
