@@ -5,14 +5,14 @@ describe Cappy::Models::Device do
   describe '#valid?' do
     let(:device_id) { 'DEADBEEF' }
     let(:name) { 'Cabinet' }
-    let(:type) { 'anyoldvalue' }
+    let(:device_type) { 'lock' }
     let(:last_check_in) { DateTime.now }
     let(:created_at) { DateTime.now - 1 }
     let(:updated_at) { DateTime.now - 1 }
 
     subject { described_class.new(device_id: device_id,
                                   name: name, 
-                                  type: type,
+                                  device_type: device_type,
                                   last_check_in: last_check_in,
                                   created_at: created_at,
                                   updated_at: updated_at ) }
@@ -35,15 +35,15 @@ describe Cappy::Models::Device do
       end
 
       context 'and the device_id is not nil' do
-        context 'but the type is nil' do
-          let(:type) { nil }
+        context 'but the device_type is nil' do
+          let(:device_type) { nil }
 
           it 'is not valid' do
             expect(subject).to_not be_valid
           end
         end
 
-        context 'and the type is not nil' do
+        context 'and the device_type is not nil' do          
           it 'is valid' do
             expect(subject).to be_valid
             subject.save!

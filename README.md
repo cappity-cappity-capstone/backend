@@ -35,7 +35,7 @@ Here's the basic structure of the devices table:
 | id:int             |
 | device_id:string   |
 | name:string        |
-| type:string        |
+| device_type:string        |
 | last_check_in:time |
 | created_at:time    |
 | updated_at:time    |
@@ -46,7 +46,7 @@ Things to note:
 
 * `device_id` is the unique id that is reported by the module
 * `name` is an optional string that is set by the user
-* `type` should be enforced to be one of the following:
+* `device_type` should be enforced to be one of the following:
   * `lock`
   * `outlet`
   * `gas_valve`
