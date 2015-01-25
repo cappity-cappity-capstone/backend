@@ -11,6 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125165223) do
+ActiveRecord::Schema.define(version: 20150125183018) do
+
+  create_table "devices", force: :cascade do |t|
+    t.string   "device_id",     null: false
+    t.string   "name",          null: false
+    t.string   "type",          null: false
+    t.datetime "last_check_in", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "devices", ["device_id"], name: "index_devices_on_device_id"
 
 end
