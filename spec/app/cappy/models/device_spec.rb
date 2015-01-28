@@ -7,17 +7,16 @@ describe Cappy::Models::Device do
     let(:name)          { 'Cabinet' }
     let(:device_type)   { 'lock' }
     let(:last_check_in) { DateTime.now }
-    let(:created_at)    { DateTime.now - 1 }
-    let(:updated_at)    { DateTime.now - 1 }
+    
 
     valid_types = %w{lock outlet gas_valve airbourne_alert}
 
-    subject { described_class.new(device_id: device_id,
-                                  name: name, 
-                                  device_type: device_type,
-                                  last_check_in: last_check_in,
-                                  created_at: created_at,
-                                  updated_at: updated_at ) }
+    subject do
+      described_class.new(device_id: device_id,
+                          name: name,
+                          device_type: device_type,
+                          last_check_in: last_check_in)
+    end
 
     context 'when the device_id is nil' do
       let(:device_id) { nil }
@@ -64,19 +63,11 @@ describe Cappy::Models::Device do
             end
           end
 
-          context 'but the last_check_in is nil' do
+          context 'and the last_check_in is nil' do
             let(:last_check_in) { nil }
 
             it 'is not valid' do
-              expect(subject).to_not be_valid
-            end
-          end
-
-          context 'but the last_check_in is before created_at' do
-            let(:last_check_in) { created_at - 1 }
-
-            it 'is not valid' do
-              expect(subject).to_not be_valid
+              expect(subject).to be_valid
             end
           end
 
