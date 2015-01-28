@@ -5,16 +5,16 @@ describe Cappy::Models::State do
   describe '#valid?' do
     let(:device_id) { 'DEADBEEF' }
     let(:state) { 1 }
-    let(:source) { "scheduled" }
+    let(:source) { 'scheduled' }
     let(:created_at) { DateTime.now }
 
     valid_sources = %w(scheduled parent_left manual_override)
 
     subject do
       described_class.new(device_id: device_id,
-                                  state: state,
-                                  source: source,
-                                  created_at: created_at)
+                          state: state,
+                          source: source,
+                          created_at: created_at)
     end
 
     context 'when the device_id is nil' do
@@ -45,7 +45,7 @@ describe Cappy::Models::State do
 
         context 'and the source is not nil' do
           context 'but the source is an invalid value' do
-            let(:source) { "new_source_type" }
+            let(:source) { 'new_source_type' }
 
             it 'is not valid' do
               expect(subject).to_not be_valid
