@@ -10,10 +10,12 @@ describe Cappy::Models::State do
 
     valid_sources = %w(scheduled parent_left manual_override)
 
-    subject { described_class.new(device_id: device_id,
+    subject do
+      described_class.new(device_id: device_id,
                                   state: state,
                                   source: source,
-                                  created_at: created_at ) }
+                                  created_at: created_at)
+    end
 
     context 'when the device_id is nil' do
       let(:device_id) { nil }
