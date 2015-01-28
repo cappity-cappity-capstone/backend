@@ -8,7 +8,7 @@ RSpec::Core::RakeTask.new(:spec)
 
 desc 'Run the quality metrics'
 RuboCop::RakeTask.new(:quality) do |cop|
-  cop.patterns = ['app/**/*.rb']
+  cop.patterns = ['app/**/*.rb', 'spec/**/*.rb']
 end
 
 namespace :db do
