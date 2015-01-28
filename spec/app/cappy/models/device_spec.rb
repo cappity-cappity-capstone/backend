@@ -7,9 +7,8 @@ describe Cappy::Models::Device do
     let(:name)          { 'Cabinet' }
     let(:device_type)   { 'lock' }
     let(:last_check_in) { DateTime.now }
-    
 
-    valid_types = %w{lock outlet gas_valve airbourne_alert}
+    valid_types = %w( lock outlet gas_valve airbourne_alert )
 
     subject do
       described_class.new(device_id: device_id,
@@ -46,7 +45,7 @@ describe Cappy::Models::Device do
 
         context 'and the device_type is not nil' do
           context 'but the device_type is an invalid value' do
-            let(:device_type) { "new_type" }
+            let(:device_type) { 'new_type' }
 
             it 'is not valid' do
               expect(subject).to_not be_valid
