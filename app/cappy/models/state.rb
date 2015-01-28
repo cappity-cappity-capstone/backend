@@ -8,7 +8,6 @@ module Cappy
       validates :device_id,  presence: true
       validates :state,      presence: true
       validates :source,     presence: true, inclusion: { in: VALID_SOURCES }
-      validates :created_at, presence: true
     end
   end
 end

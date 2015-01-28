@@ -4,7 +4,7 @@ class CreateStates < ActiveRecord::Migration
       t.string   :device_id,  null: false
       t.integer  :state,      null: false
       t.string   :source,     null: false
-      t.datetime :created_at, null: false
+      t.timestamps            null: false
 
       t.index :device_id
 

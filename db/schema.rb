@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20150127200131) do
     t.integer  "state",      null: false
     t.string   "source",     null: false
     t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "states", ["device_id"], name: "index_states_on_device_id"

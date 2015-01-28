@@ -6,15 +6,13 @@ describe Cappy::Models::State do
     let(:device_id) { 'DEADBEEF' }
     let(:state) { 1 }
     let(:source) { 'scheduled' }
-    let(:created_at) { DateTime.now }
 
     valid_sources = %w(scheduled parent_left manual_override)
 
     subject do
       described_class.new(device_id: device_id,
                           state: state,
-                          source: source,
-                          created_at: created_at)
+                          source: source)
     end
 
     context 'when the device_id is nil' do
