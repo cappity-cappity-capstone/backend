@@ -8,13 +8,13 @@ describe Cappy::Models::Device do
     let(:device_type)   { 'lock' }
     let(:last_check_in) { DateTime.now }
 
-    valid_types = %w( lock outlet gas_valve airbourne_alert )
-
     subject do
-      described_class.new(device_id: device_id,
-                          name: name,
-                          device_type: device_type,
-                          last_check_in: last_check_in)
+      described_class.new(
+        device_id: device_id,
+        name: name,
+        device_type: device_type,
+        last_check_in: last_check_in
+      )
     end
 
     context 'when the device_id is nil' do
@@ -53,8 +53,8 @@ describe Cappy::Models::Device do
           end
 
           context 'and the device_type is a valid value' do
-            valid_types.each do |d_t|
-              let(:device_type) { d_t }
+            Cappy::Models::Device::VALID_DEVICE_TYPES.each do |type|
+              let(:device_type) { type }
 
               it 'is valid' do
                 expect(subject).to be_valid
