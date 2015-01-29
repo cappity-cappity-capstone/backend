@@ -44,6 +44,17 @@ describe Cappy::Services::Devices do
       end
     end
 
+    context 'when there already exists a Device with that device id' do
+      let(:valid_hash) { build(:lock).as_json }
+
+      before { subject.create(valid_hash) }
+
+      it 'raises an error' do
+        expect { subject.create(valid_hash) }
+          .to raise_error(Cappy::Errors::DuplicationError)
+      end
+    end
+
     context 'when all of the keys and values are valid' do
       let(:valid_hash) { build(:gas_valve).as_json }
       let(:including_hash) { valid_hash.reject { |_, v| v.nil? }.to_h }

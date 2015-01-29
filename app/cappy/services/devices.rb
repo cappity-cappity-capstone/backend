@@ -12,9 +12,11 @@ module Cappy
       end
 
       def create(data)
-        wrap_active_record_errors do
-          Models::Device.create!(data)
+        if Models::Device.exists?(device_id: data['device_id'])
+          fail Errors::DuplicationError, "Device already exists with id: #{data['device_id']}"
         end
+
+        wrap_active_record_errors { Models::Device.create!(data) }
       end
 
       def read(device_id)
