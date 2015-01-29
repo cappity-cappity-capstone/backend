@@ -13,4 +13,5 @@ group :development, :test do
   gem 'rubocop', '~> 0.28.0'
   gem 'rack-test', '~> 0.6.3'
   gem 'database_cleaner', '~> 1.4.0'
+  gem 'factory_girl', '~> 4.5.0'
 end
