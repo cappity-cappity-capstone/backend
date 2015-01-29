@@ -8,6 +8,14 @@ module Cappy
       validates :device_id, presence: true
       validates :name, presence: true
       validates :device_type, presence: true, inclusion: { in: VALID_DEVICE_TYPES }
+
+      def as_json(*args)
+        super.dup.tap do |hash|
+          hash.delete('created_at')
+          hash.delete('updated_at')
+          hash['last_check_in'] = last_check_in.utc.iso8601 if last_check_in.present?
+        end
+      end
     end
   end
 end
