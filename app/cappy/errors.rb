@@ -9,5 +9,11 @@ module Cappy
 
     # Raised when bad attributes are passed to create or update a device.
     BadDeviceOptions = Class.new(BaseError)
+
+    # Raised when a request cannot be parsed.
+    MalformedRequestError = Class.new(BaseError)
+
+    # Raised when duplicated data is created.
+    DuplicationError = Class.new(BaseError)
   end
 end
