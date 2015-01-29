@@ -1,4 +1,6 @@
 # Cappy Backend
+[![build status](https://img.shields.io/travis/cappity-cappity-capstone/backend.svg?style=flat)](https://travis-ci.org/cappity-cappity-capstone/backend)
+[![dependencies](https://img.shields.io/gemnasium/cappity-cappity-capstone/backend.svg?style=flat)](https://gemnasium.com/cappity-cappity-capstone/backend)
 
 This repository holds the backend for NU Capstone 2015 Group W5.
 The backend is written in Ruby, using Sinatra, ActiveRecord, SQLite3, and unicorn.
