@@ -6,5 +6,8 @@ module Cappy
 
     # Raised when an unknown device_id is referenced.
     NoSuchDevice = Class.new(BaseError)
+
+    # Raised when bad attributes are passed to create or update a device.
+    BadDeviceOptions = Class.new(BaseError)
   end
 end
