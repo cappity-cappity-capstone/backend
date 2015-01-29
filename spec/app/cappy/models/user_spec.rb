@@ -4,9 +4,9 @@ require 'date'
 describe Cappy::Models::User do
   describe '#valid?' do
     let(:username) { 'admin' }
-    let(:password_hash) { 'password_hash' }
+    let(:password) { 'admins_password' }
 
-    subject { described_class.new(username: username, password_hash: password_hash) }
+    subject { described_class.new(username: username, password: password) }
 
     context 'when the username is nil' do
       let(:username) { nil }
@@ -17,15 +17,15 @@ describe Cappy::Models::User do
     end
 
     context 'when the username is not nil' do
-      context 'but the password_hash is nil' do
-        let(:password_hash) { nil }
+      context 'but the password is nil' do
+        let(:password) { nil }
 
         it 'is not valid' do
           expect(subject).to_not be_valid
         end
       end
 
-      context 'and the password_hash is not nil' do
+      context 'and the password is not nil' do
         it 'is valid' do
           expect(subject).to be_valid
         end
