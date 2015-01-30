@@ -7,8 +7,6 @@ describe Cappy::Models::State do
     let(:state) { 1 }
     let(:source) { 'scheduled' }
 
-    valid_sources = %w(scheduled parent_left manual_override)
-
     subject do
       described_class.new(device_id: device_id,
                           state: state,
@@ -51,7 +49,7 @@ describe Cappy::Models::State do
           end
 
           context 'and the source is a valid value' do
-            valid_sources.each do |v_s|
+            Cappy::Models::State::VALID_SOURCES.each do |v_s|
               let(:source) { v_s }
 
               it 'is valid' do
