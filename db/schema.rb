@@ -24,4 +24,14 @@ ActiveRecord::Schema.define(version: 20150127200131) do
 
   add_index "devices", ["device_id"], name: "index_devices_on_device_id"
 
+  create_table "states", force: :cascade do |t|
+    t.string   "device_id",  null: false
+    t.integer  "state",      null: false
+    t.string   "source",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "states", ["device_id"], name: "index_states_on_device_id"
+
 end
