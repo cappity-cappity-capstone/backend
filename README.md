@@ -36,7 +36,7 @@ Here's the basic structure of the devices table:
 | device_id:string   |
 | name:string        |
 | device_type:string |
-| unit:string		 |
+| unit:string        |
 | last_check_in:time |
 | created_at:time    |
 | updated_at:time    |

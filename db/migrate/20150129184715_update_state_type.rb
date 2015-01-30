@@ -1,5 +1,5 @@
 class UpdateStateType < ActiveRecord::Migration
   def change
-  	change_column :states, :state, :decimal
+    change_column :states, :state, :decimal
   end
 end
