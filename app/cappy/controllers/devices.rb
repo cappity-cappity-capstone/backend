@@ -27,6 +27,11 @@ module Cappy
         status 204
         Services::Devices.destroy(device_id)
       end
+
+      put '/devices/:device_id/watchdog' do |device_id|
+        status 200
+        Services::Devices.update(device_id, last_check_in: Time.now.utc)
+      end
     end
   end
 end
