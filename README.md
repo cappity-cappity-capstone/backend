@@ -73,3 +73,18 @@ The state table is very straightforward:
 ```
 
 There should be an index on the `device_id` column to enable quick searching.
+
+### `users`
+
+```
++-----------------------+
+| users                 |
++-----------------------+
+| id:int                |
+| username:string       |
+| password:string       |
+| created_at:time       |
++-----------------------+
+```
+
+There should be an index on the `username` column to enable quick searching.
