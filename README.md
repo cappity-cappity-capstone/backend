@@ -78,10 +78,10 @@ There should be an index on the `device_id` column to enable quick searching.
 
 ```
 +-----------------------+
-| states                |
+| users                 |
 +-----------------------+
 | id:int                |
-| username:string 		|
+| username:string       |
 | password:string       |
 | created_at:time       |
 +-----------------------+
