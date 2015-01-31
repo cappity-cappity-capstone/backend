@@ -26,7 +26,7 @@ RUN chown -R backend:backend /opt/cappy/
 WORKDIR /opt/cappy/backend
 USER backend
 RUN bundle config --global jobs 8
-RUN bundle install --deployment --path vendor/bundle
+RUN bundle install --deployment
 
 # Default startup command
 CMD bundle exec rake web
