@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129185229) do
+ActiveRecord::Schema.define(version: 20150131125950) do
 
   create_table "devices", force: :cascade do |t|
     t.string   "device_id",     null: false
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20150129185229) do
   add_index "devices", ["device_id"], name: "index_devices_on_device_id"
 
   create_table "states", force: :cascade do |t|
-    t.string   "device_id",  null: false
+    t.integer  "device_id",  null: false
     t.decimal  "state",      null: false
     t.string   "source",     null: false
     t.datetime "created_at", null: false
