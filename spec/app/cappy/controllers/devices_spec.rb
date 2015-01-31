@@ -108,7 +108,7 @@ describe Cappy::Controllers::Devices do
         it 'updates that device' do
           put "/devices/#{device.device_id}/", { name: 'Kitchen' }.to_json
 
-          expect(last_response.status).to eq(204)
+          expect(last_response.status).to eq(200)
         end
       end
     end

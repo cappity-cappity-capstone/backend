@@ -19,7 +19,7 @@ module Cappy
       end
 
       put '/devices/:device_id/' do |device_id|
-        status 204
+        status 200
         Services::Devices.update(device_id, parse_json(req_body)).to_json
       end
 
