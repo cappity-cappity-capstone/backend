@@ -37,7 +37,8 @@ Here's the basic structure of the devices table:
 | id:int             |
 | device_id:string   |
 | name:string        |
-| device_type:string        |
+| device_type:string |
+| unit:string        |
 | last_check_in:time |
 | created_at:time    |
 | updated_at:time    |
@@ -67,8 +68,9 @@ The state table is very straightforward:
 | states                |
 +-----------------------+
 | id:int                |
-| state:int             |
 | device_id:foreign_key |
+| state:decimal         |
+| source:string         |
 | created_at:time       |
 +-----------------------+
 ```
