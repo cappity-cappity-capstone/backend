@@ -3,6 +3,8 @@ require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 require 'sinatra/activerecord/rake'
 
+SHA = `git rev-parse --short HEAD`.strip.freeze
+
 desc 'Run the application specs'
 RSpec::Core::RakeTask.new(:spec)
 
@@ -41,8 +43,8 @@ end
 
 desc 'Run the Docker build'
 task :docker do
-  sha = `git rev-parse --short HEAD`.strip
-  system("docker build -t backend:#{sha} .") || fail('Unable to build backend')
+  system("docker build -t backend:#{SHA} .") || fail('Unable to build backend')
+  system("docker tag -f backend:#{SHA} backend:latest") || fail('Unable to tag docker image')
 end
 
 desc 'Run the specs and quality metrics'

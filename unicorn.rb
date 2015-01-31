@@ -7,5 +7,3 @@ timeout 30
 working_directory APP_DIR
 pid PID_PATH
 listen APP_PORT, backlog: 64
-preload_app true
-user 'nobody'
