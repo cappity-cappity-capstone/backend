@@ -3,9 +3,12 @@ require 'date'
 
 describe Cappy::Models::State do
   describe '#valid?' do
-    let(:device_id) { 'DEADBEEF' }
+    let(:device) { build(:lock) }
+    let(:device_id) { device.id }
     let(:state) { 1 }
     let(:source) { 'scheduled' }
+
+    before { device.save }
 
     subject do
       described_class.new(
