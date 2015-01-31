@@ -156,13 +156,11 @@ describe Cappy::Controllers::Devices do
       end
 
       it 'updates the last_check_in time' do
-        expect {
+        expect do
           put "/devices/#{device_id}/watchdog/"
 
           expect(last_response.status).to eq(200)
-        }.to change {
-          device.tap(&:reload).last_check_in
-        }
+        end.to change { device.tap(&:reload).last_check_in }
       end
     end
   end

@@ -30,18 +30,14 @@ describe Cappy::Services::States do
     let(:data) { { state: 1.0, source: 'manual_override' } }
 
     it 'creates a new state' do
-      expect {
-        subject.create(device, data)
-      }.to change { Cappy::Models::State.count }.by(1)
+      expect { subject.create(device, data) }.to change { Cappy::Models::State.count }.by(1)
     end
 
     context 'when some data is missing' do
       let(:data) { { state: 1.0 } }
 
       it 'raises a bad state options error' do
-        expect {
-          subject.create(device, data)
-        }.to raise_error(Cappy::Errors::BadStateOptions)
+        expect { subject.create(device, data) }.to raise_error(Cappy::Errors::BadStateOptions)
       end
     end
   end
