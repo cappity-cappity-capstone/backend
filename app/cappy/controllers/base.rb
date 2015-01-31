@@ -10,7 +10,7 @@ module Cappy
 
       error do |err|
         case err
-        when Errors::MalformedRequestError, Errors::BadDeviceOptions
+        when Errors::MalformedRequestError, Errors::BadDeviceOptions, Errors::BadStateOptions
           status 400
         when Errors::NoSuchDevice
           status 404
@@ -30,7 +30,7 @@ module Cappy
       end
 
       def req_body
-        request.body.tap(&:rewind).string
+        request.body.tap(&:rewind).read
       end
     end
   end
