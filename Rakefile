@@ -39,5 +39,11 @@ task web: :environment do
   Unicorn::HttpServer.new(app, unicorn_conf).start.join
 end
 
+desc 'Run the Docker build'
+task :docker do
+  sha = `git rev-parse --short HEAD`.strip
+  system("docker build -t backend:#{sha} .") || fail('Unable to build backend')
+end
+
 desc 'Run the specs and quality metrics'
 task default: [:spec, :quality]
