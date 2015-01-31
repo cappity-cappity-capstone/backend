@@ -40,8 +40,8 @@ module Cappy
         end
       end
 
-      def wrap_active_record_errors(&block)
-        block.call
+      def wrap_active_record_errors
+        yield
       rescue ActiveRecord::UnknownAttributeError, ActiveRecord::RecordInvalid => ex
         raise Errors::BadDeviceOptions, ex
       end
