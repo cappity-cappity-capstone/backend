@@ -86,6 +86,12 @@ There should be an index on the `device_id` column to enable quick searching.
 * outlet
 * lock
 
+### Source enum
+
+* scheduled
+* parent_left
+* manual_override
+
 ### Register device
 
 > POST /devices
@@ -114,7 +120,7 @@ There should be an index on the `device_id` column to enable quick searching.
 
 > #### 200
 > Device exists
-> #### 400
+> #### 404
 > Device needs to reregister
 
 ### State devices status
@@ -126,8 +132,8 @@ There should be an index on the `device_id` column to enable quick searching.
 > #### 200
 
     {
-      "device_id": "#{device_id}",
-      "state": 0.0
+      "state": "0.0",
+      "source": One of Source
     }
 
 > #### 404
@@ -138,12 +144,13 @@ There should be an index on the `device_id` column to enable quick searching.
 > POST /devices/#{device_id}/status
 
     {
-      "state": 0.0
+      "state": "0.0",
+      "source": One of Source
     }
 
 #### Responses
 
-> #### 200
+> #### 201
 
 > #### 404
 > No known device. Should register
