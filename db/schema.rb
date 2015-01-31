@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127200131) do
+ActiveRecord::Schema.define(version: 20150125183018) do
 
   create_table "devices", force: :cascade do |t|
     t.string   "device_id",     null: false

@@ -10,7 +10,7 @@ describe Cappy::Controllers::Version do
       get '/version'
 
       expect(last_response.status).to eq(200)
-      expect(last_response.body).to eq(Cappy::VERSION)
+      expect(JSON.parse(last_response.body)).to eq('version' => Cappy::VERSION)
     end
   end
 end
