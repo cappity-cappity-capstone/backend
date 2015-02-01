@@ -152,7 +152,7 @@ describe Cappy::Controllers::Devices do
 
       before do
         device.last_check_in = Time.mktime(0)
-        device.save
+        device.save!
       end
 
       it 'updates the last_check_in time' do
