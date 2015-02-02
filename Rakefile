@@ -3,6 +3,8 @@ require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 require 'sinatra/activerecord/rake'
 
+SHA = `git rev-parse --short HEAD`.strip.freeze
+
 desc 'Run the application specs'
 RSpec::Core::RakeTask.new(:spec)
 
@@ -37,6 +39,12 @@ task web: :environment do
   unicorn_conf = { config_file: 'unicorn.rb' }
   app = Unicorn.builder('config.ru', unicorn_conf)
   Unicorn::HttpServer.new(app, unicorn_conf).start.join
+end
+
+desc 'Run the Docker build'
+task :docker do
+  system("docker build -t backend:#{SHA} .") || fail('Unable to build backend')
+  system("docker tag -f backend:#{SHA} backend:latest") || fail('Unable to tag docker image')
 end
 
 desc 'Run the specs and quality metrics'
