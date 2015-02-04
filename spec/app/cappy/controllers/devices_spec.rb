@@ -136,4 +136,32 @@ describe Cappy::Controllers::Devices do
       end
     end
   end
+
+  describe 'PUT /devices/DEVICE_ID/watchdog/' do
+    context 'when the DEVICE_ID does not exist' do
+      it 'returns a "404 not found"' do
+        put '/devices/does_not_exist/watchdog/'
+
+        expect(last_response.status).to eq(404)
+      end
+    end
+
+    context 'when the DEVICE_ID exists' do
+      let(:device) { create(:lock) }
+      let(:device_id) { device.device_id }
+
+      before do
+        device.last_check_in = Time.mktime(0)
+        device.save!
+      end
+
+      it 'updates the last_check_in time' do
+        expect do
+          put "/devices/#{device_id}/watchdog/"
+
+          expect(last_response.status).to eq(200)
+        end.to change { device.tap(&:reload).last_check_in }
+      end
+    end
+  end
 end
