@@ -19,7 +19,6 @@ module Cappy
         super.dup.tap do |hash|
           hash.delete('id')
           hash.delete('device_id')
-          hash.delete('created_at')
           hash.delete('updated_at')
           hash['state'] = state.to_s('F')
         end
