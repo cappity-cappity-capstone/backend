@@ -16,4 +16,5 @@ group :development, :test do
   gem 'rack-test', '~> 0.6.3'
   gem 'database_cleaner', '~> 1.4.0'
   gem 'factory_girl', '~> 4.5.0'
+  gem 'fakeredis', '~> 0.5.0'
 end
