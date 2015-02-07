@@ -3,5 +3,6 @@ module Clockwork
     Resque.enqueue(job)
   end
 
-  #every(5.seconds, 'JobName') { Trigger Cappy Service here }
+  # Sample
+  #every 5.seconds, Cappy::Services::Broadcast
 end
