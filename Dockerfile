@@ -30,3 +30,4 @@ RUN bundle install --deployment
 
 # Default startup command
 CMD bundle exec rake web
+ENV REDIS_HOST redis

@@ -7,6 +7,8 @@ gem 'unicorn', '~> 4.8.3'
 gem 'sqlite3', '~> 1.3.10'
 gem 'pry', '~> 0.10.1'
 gem 'sinatra-activerecord', '~> 2.0.4'
+gem 'resque', '~> 1.25.2'
+gem 'clockwork', '~> 1.1.0'
 
 group :development, :test do
   gem 'rspec', '~> 3.1.0'
