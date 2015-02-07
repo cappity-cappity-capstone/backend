@@ -20,7 +20,7 @@ describe Cappy::Services::Devices do
 
       it 'raises an error' do
         expect { subject.create(invalid_hash) }
-          .to raise_error(Cappy::Errors::BadDeviceOptions)
+          .to raise_error(Cappy::Errors::BadOptions)
       end
     end
 
@@ -30,7 +30,7 @@ describe Cappy::Services::Devices do
 
       it 'raises an error' do
         expect { subject.create(invalid_hash) }
-          .to raise_error(Cappy::Errors::BadDeviceOptions)
+          .to raise_error(Cappy::Errors::BadOptions)
       end
     end
 
@@ -40,7 +40,7 @@ describe Cappy::Services::Devices do
 
       it 'raises an error' do
         expect { subject.create(invalid_hash) }
-          .to raise_error(Cappy::Errors::BadDeviceOptions)
+          .to raise_error(Cappy::Errors::BadOptions)
       end
     end
 
@@ -101,7 +101,7 @@ describe Cappy::Services::Devices do
       context 'but the data is invalid' do
         it 'raises an error' do
           expect { subject.update(device.device_id, device_type: 'stove') }
-            .to raise_error(Cappy::Errors::BadDeviceOptions)
+            .to raise_error(Cappy::Errors::BadOptions)
         end
       end
 

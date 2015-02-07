@@ -10,7 +10,7 @@ module Cappy
 
       error do |err|
         case err
-        when Errors::MalformedRequestError, Errors::BadDeviceOptions, Errors::BadStateOptions
+        when Errors::MalformedRequestError, Errors::BadOptions
           status 400
         when Errors::NoSuchDevice
           status 404
