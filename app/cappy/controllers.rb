@@ -6,6 +6,7 @@ module Cappy
     autoload :Devices, 'cappy/controllers/devices'
     autoload :States, 'cappy/controllers/states'
     autoload :Broadcast, 'cappy/controllers/broadcast'
+    autoload :Schedules, 'cappy/controllers/schedules'
     autoload :Version, 'cappy/controllers/version'
   end
 end
