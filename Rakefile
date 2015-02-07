@@ -41,6 +41,24 @@ task web: :environment do
   Unicorn::HttpServer.new(app, unicorn_conf).start.join
 end
 
+desc 'Run the Clockwork worker'
+task clockwork: :environment do
+  require './config/clock.rb'
+  Clockwork.run
+end
+
+desc 'Swaps redis with the container name'
+task swap_redis_if_needed: :environment do
+  if ENV['DOCKER']
+    Resque.redis = Redis.new(host: 'redis')
+  end
+end
+
+desc 'Run the Resque queue worker'
+task resque: [:environment, :swap_redis_if_needed] do
+  Rake::Task['resque:work'].invoke
+end
+
 desc 'Run the Docker build'
 task :docker do
   system("docker build -t backend:#{SHA} .") || fail('Unable to build backend')
