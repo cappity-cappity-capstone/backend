@@ -77,6 +77,22 @@ The state table is very straightforward:
 
 There should be an index on the `device_id` column to enable quick searching.
 
+### `schedules`
+
+```
++-----------------------+
+| schedules             |
++-----------------------+
+| id:int                |
+| device_id:foreign_key |
+| start_time:datetime   |
+| end_time:datetime     |
+| interval:int          |
++-----------------------+
+```
+
+A schedule is tied to a device.  It begins at a given start time (can be now), and ends at a given end_time, if you want it to.  It'll fire every interval within [start time, end time).
+
 ## Device to Backend API
 
 ### DeviceType enum
