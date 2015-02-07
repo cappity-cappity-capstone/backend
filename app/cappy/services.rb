@@ -5,5 +5,6 @@ module Cappy
     autoload :Devices, 'cappy/services/devices'
     autoload :States, 'cappy/services/states'
     autoload :Broadcast, 'cappy/services/broadcast'
+    autoload :Schedules, 'cappy/services/schedules'
   end
 end
