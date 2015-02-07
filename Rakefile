@@ -48,14 +48,13 @@ task clockwork: :environment do
 end
 
 desc 'Swaps redis with the container name'
-task swap_redis_if_needed: :environment do
-  if ENV['DOCKER']
-    Resque.redis = Redis.new(host: 'redis')
-  end
+task configure_redis: :environment do
+  ENV['REDIS_HOST'] = 'localhost'
+  Resque.redis = Redis.new(host: ENV['REDIS_HOST'])
 end
 
 desc 'Run the Resque queue worker'
-task resque: [:environment, :swap_redis_if_needed] do
+task resque: [:environment, :configure_redis] do
   Rake::Task['resque:work'].invoke
 end
 
