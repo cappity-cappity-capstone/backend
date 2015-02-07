@@ -70,7 +70,7 @@ describe Cappy::Services::Devices do
     context 'when there is no device with the given id' do
       it 'raises an error' do
         expect { subject.read('anything') }
-          .to raise_error(Cappy::Errors::NoSuchDevice)
+          .to raise_error(Cappy::Errors::NoSuchObject)
       end
     end
 
@@ -89,7 +89,7 @@ describe Cappy::Services::Devices do
     context 'when the given device id cannot be found' do
       it 'raises an error' do
         expect { subject.update('anything', name: 'Kitchen') }
-          .to raise_error(Cappy::Errors::NoSuchDevice)
+          .to raise_error(Cappy::Errors::NoSuchObject)
       end
     end
 
@@ -120,7 +120,7 @@ describe Cappy::Services::Devices do
     context 'when the given device id does not exist' do
       it 'raises an error' do
         expect { subject.destroy('anything') }
-          .to raise_error(Cappy::Errors::NoSuchDevice)
+          .to raise_error(Cappy::Errors::NoSuchObject)
       end
     end
 
@@ -133,7 +133,7 @@ describe Cappy::Services::Devices do
       it 'removes that device from the database' do
         subject.destroy(device_id)
         expect { subject.read(device_id) }
-          .to raise_error(Cappy::Errors::NoSuchDevice)
+          .to raise_error(Cappy::Errors::NoSuchObject)
       end
     end
   end

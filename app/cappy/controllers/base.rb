@@ -12,7 +12,7 @@ module Cappy
         case err
         when Errors::MalformedRequestError, Errors::BadOptions
           status 400
-        when Errors::NoSuchDevice
+        when Errors::NoSuchObject
           status 404
         when Errors::DuplicationError
           status 409

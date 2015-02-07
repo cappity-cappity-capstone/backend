@@ -38,7 +38,7 @@ module Cappy
 
       def get_device(device_id)
         Models::Device.find_by(device_id: device_id).tap do |device|
-          fail Errors::NoSuchDevice, device_id unless device
+          fail Errors::NoSuchObject, device_id unless device
         end
       end
     end

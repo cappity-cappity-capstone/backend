@@ -4,8 +4,8 @@ module Cappy
     # Never raised, but useful as an application-specific catch-all.
     BaseError = Class.new(::StandardError)
 
-    # Raised when an unknown device_id is referenced.
-    NoSuchDevice = Class.new(BaseError)
+    # Raised when an unknown foreign key is referenced.
+    NoSuchObject = Class.new(BaseError)
 
     # Raised when bad attributes are passed to create or update a model.
     BadOptions = Class.new(BaseError)
