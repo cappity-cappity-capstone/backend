@@ -22,10 +22,18 @@ namespace :db do
   end
 end
 
-task environment: 'db:load_config' do
+task app_environment: 'db:load_config' do
   $LOAD_PATH << File.expand_path('app', '.')
   require 'cappy'
 end
+
+desc 'Swaps redis with the container name'
+task configure_redis: :app_environment do
+  ENV['REDIS_HOST'] = 'localhost'
+  Resque.redis = Redis.new(host: ENV['REDIS_HOST'])
+end
+
+task environment: %w(db:load_config app_environment swap_redis_if_needed)
 
 desc 'Open a Pry console with the application loaded and database set'
 task shell: :environment do
@@ -47,15 +55,10 @@ task clockwork: :environment do
   Clockwork.run
 end
 
-desc 'Swaps redis with the container name'
-task configure_redis: :environment do
-  ENV['REDIS_HOST'] = 'localhost'
-  Resque.redis = Redis.new(host: ENV['REDIS_HOST'])
-end
-
 desc 'Run the Resque queue worker'
-task resque: [:environment, :configure_redis] do
-  Rake::Task['resque:work'].invoke
+task resque: :environment do
+  # Queue to work and 1.0 interval when checking queue
+  Resque::Worker.new('cappy').work(1.0)
 end
 
 desc 'Run the Docker build'
