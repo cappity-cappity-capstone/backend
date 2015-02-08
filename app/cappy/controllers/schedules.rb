@@ -9,7 +9,7 @@ module Cappy
 
       get '/devices/:device_id/schedules/?' do |device_id|
         status 200
-        Services::Schedules.list(device_id).to_json
+        Services::Schedules.for_device(device_id).to_json
       end
 
       post '/schedules/:device_id/?' do |device_id|

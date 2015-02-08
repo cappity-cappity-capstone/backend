@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe Cappy::Controllers::Schedules do
   include Rack::Test::Methods

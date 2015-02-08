@@ -16,10 +16,18 @@ describe Cappy::Services::Schedules do
         expect(subject.list).to eq(schedules.map(&:as_json))
       end
     end
+  end
+
+  describe '#for_device' do
+    let(:schedule_one) { build(:schedule_ends_immediately, :hourly, device: device_one) }
+    let(:schedule_two) { build(:schedule_forever_from_now, :hourly, device: device_two) }
+    let(:schedules) { [schedule_one, schedule_two] }
+
+    before { schedules.each(&:save!) }
 
     context 'with a device' do
       it 'returns a list of all of the schedules' do
-        expect(subject.list(device_one.device_id)).to eq([schedule_one.as_json])
+        expect(subject.for_device(device_one.device_id)).to eq([schedule_one.as_json])
       end
     end
   end

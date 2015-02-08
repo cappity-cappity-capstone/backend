@@ -9,13 +9,13 @@ module Cappy
 
       module_function
 
-      def list(device_id = nil)
-        if device_id.nil?
-          Models::Schedule.all.map(&:as_json)
-        else
-          device = Services::Devices.get_device(device_id)
-          device.schedules.all.map(&:as_json)
-        end
+      def list
+        Models::Schedule.all.map(&:as_json)
+      end
+
+      def for_device(device_id = nil)
+        device = Services::Devices.get_device(device_id)
+        device.schedules.all.map(&:as_json)
       end
 
       def create(device, data)
