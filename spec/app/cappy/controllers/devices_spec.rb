@@ -132,7 +132,7 @@ describe Cappy::Controllers::Devices do
 
         expect(last_response.status).to eq(204)
         expect { Cappy::Services::Devices.read(device_id) }
-          .to raise_error(Cappy::Errors::NoSuchDevice)
+          .to raise_error(Cappy::Errors::NoSuchObject)
       end
     end
   end

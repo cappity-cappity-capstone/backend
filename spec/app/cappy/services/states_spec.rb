@@ -37,7 +37,7 @@ describe Cappy::Services::States do
       let(:data) { { state: 1.0 } }
 
       it 'raises a bad state options error' do
-        expect { subject.create(device, data) }.to raise_error(Cappy::Errors::BadStateOptions)
+        expect { subject.create(device, data) }.to raise_error(Cappy::Errors::BadOptions)
       end
     end
   end

@@ -5,6 +5,8 @@ module Cappy
     # specific errors to make better use of HTTP errors codes in each
     # controller.
     module States
+      include Base
+
       module_function
 
       def list(device)
@@ -17,12 +19,6 @@ module Cappy
 
       def create(device, data)
         wrap_active_record_errors { device.states.create!(data) }
-      end
-
-      def wrap_active_record_errors
-        yield
-      rescue ActiveRecord::UnknownAttributeError, ActiveRecord::RecordInvalid => ex
-        raise Errors::BadStateOptions, ex
       end
     end
   end

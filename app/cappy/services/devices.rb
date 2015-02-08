@@ -5,6 +5,8 @@ module Cappy
     # specific errors to make better use of HTTP errors codes in each
     # controller.
     module Devices
+      include Base
+
       module_function
 
       def list
@@ -36,14 +38,8 @@ module Cappy
 
       def get_device(device_id)
         Models::Device.find_by(device_id: device_id).tap do |device|
-          fail Errors::NoSuchDevice, device_id unless device
+          fail Errors::NoSuchObject, device_id unless device
         end
-      end
-
-      def wrap_active_record_errors
-        yield
-      rescue ActiveRecord::UnknownAttributeError, ActiveRecord::RecordInvalid => ex
-        raise Errors::BadDeviceOptions, ex
       end
     end
   end
