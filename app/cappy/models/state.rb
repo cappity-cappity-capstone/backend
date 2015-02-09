@@ -20,6 +20,7 @@ module Cappy
           hash.delete('id')
           hash.delete('device_id')
           hash.delete('updated_at')
+          hash['created_at'] = created_at.utc.iso8601
           hash['state'] = state.to_s('F')
         end
       end

@@ -15,9 +15,13 @@ module Cappy
         super.dup.tap do |hash|
           hash.delete('created_at')
           hash.delete('updated_at')
+          hash['current_state'] = current_state.as_json
           hash['last_check_in'] = last_check_in.utc.iso8601 if last_check_in.present?
-          hash['state'] = states.last.as_json if states.any?
         end
+      end
+
+      def current_state
+        states.last unless states.empty?
       end
     end
   end
