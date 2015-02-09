@@ -33,7 +33,7 @@ task configure_redis: :app_environment do
   Resque.redis = Redis.new(host: ENV['REDIS_HOST'])
 end
 
-task environment: %w(db:load_config app_environment swap_redis_if_needed)
+task environment: %w(db:load_config app_environment configure_redis)
 
 desc 'Open a Pry console with the application loaded and database set'
 task shell: :environment do
