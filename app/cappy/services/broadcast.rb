@@ -16,7 +16,7 @@ module Cappy
       end
 
       def send_message
-        socket.send('HAL CCS', 0, BROADCAST_PORT, BROADCAST_ADDRESS)
+        socket.send('HAL CCS', 0, BROADCAST_ADDRESS, BROADCAST_PORT)
         sleep(5)
       end
 
