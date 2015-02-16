@@ -1,21 +1,24 @@
 module Cappy
   module Services
     # I don't know what this does
-    module CloudService
-      CLOUD_ADDR = 'http://localhost:4567/auth'
-
+    class CloudService
       include Base
 
-      module_function
+      def initialize(host, port)
+        @host = host
+        @port = port
+      end
 
-      def create_control_server(local_port)
-        connection = Excon.new('#{CLOUD_ADDR}/control_servers')
-        connection.post(body: JSON.generate(uuid: Digest::SHA1.hexdigest(Mac.addr),
+      def create_control_server(mac, local_port)
+        uuid = Digest::SHA1.hexdigest(mac)
+        connection = Excon.new("#{@host}:#{@port}/control_servers")
+        connection.post(body: JSON.generate(uuid: uuid,
                                             port: local_port))
       end
 
-      def update_control_server(local_port)
-        connection = Excon.new('#{CLOUD_ADDR}/control_servers/#{Digest::SHA1.hexdigest(Mac.addr)}')
+      def update_control_server(mac, local_port)
+        uuid = Digest::SHA1.hexdigest(mac)
+        connection = Excon.new("#{@host}:#{@port}/control_servers/#{uuid}")
         connection.post(body: JSON.generate(port: local_port))
       end
     end
