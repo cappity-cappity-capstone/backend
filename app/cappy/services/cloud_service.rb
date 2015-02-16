@@ -9,15 +9,14 @@ module Cappy
       module_function
 
       def create_control_server(local_port)
-        uuid = Digest::SHA1.hexdigest Mac.addr
         connection = Excon.new('#{CLOUD_ADDR}/control_servers')
-        connection.post(body: JSON.generate(:uuid => uuid, :port => local_port))
+        connection.post(body: JSON.generate(uuid: Digest::SHA1.hexdigest(Mac.addr),
+                                            port: local_port))
       end
 
       def update_control_server(local_port)
-        uuid = Digest::SHA1.hexdigest Mac.addr
-        connection = Excon.new('#{CLOUD_ADDR}/control_servers/#{uuid}')
-        connection.post(body: JSON.generate(:port => local_port))
+        connection = Excon.new('#{CLOUD_ADDR}/control_servers/#{Digest::SHA1.hexdigest(Mac.addr)}')
+        connection.post(body: JSON.generate(port: local_port))
       end
     end
   end
