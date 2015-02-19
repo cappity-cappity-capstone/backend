@@ -10,14 +10,11 @@ module Cappy
 
       def perform
         puts 'Starting CCS broadcast'
-        5.times do
-          send_message
-        end
+        send_message
       end
 
       def send_message
         socket.send('HAL CCS', 0, BROADCAST_ADDRESS, BROADCAST_PORT)
-        sleep(5)
       end
 
       def socket
