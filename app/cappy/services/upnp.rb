@@ -15,6 +15,7 @@ module UPnP
       add_variable 'A_ARG_TYPE_Result',   'string'
 
       def forward
+        result = 'OK'
         [nil, result]
       end
     end
@@ -47,8 +48,14 @@ module Cappy
           ms.add_service 'CappyUPnPService'
         end
 
-        device.run
+        Thread.new { device.run }
+
+        port = device.setup_server.config[:Port]
+        Cappy::Services::CloudService.create_control_server(port)
       end
     end
   end
 end
+
+# curl localhost:57113/description
+# curl -X POST localhost:57113/CappyUPnPDevice/CappyUPnPService/control -H "Content-Type: text/xml; charset="utf-8"; Content-Length: 1;" -H "SoapAction: urn:schemas-upnp-org:service:CappyUPnPService:1#forward" -d ''
