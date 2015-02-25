@@ -9,7 +9,7 @@ describe Cappy::Services::Devices do
     before { devices.each(&:save!) }
 
     it 'returns a list of all of the devices' do
-      expect(subject.list).to eq(devices.map(&:as_json))
+      expect(subject.list).to eq(devices)
     end
   end
 
@@ -61,7 +61,7 @@ describe Cappy::Services::Devices do
 
       it 'adds a new device' do
         subject.create(valid_hash)
-        expect(subject.list).to match([a_hash_including(including_hash)])
+        expect(subject.list.as_json).to match([a_hash_including(including_hash)])
       end
     end
   end
@@ -80,7 +80,7 @@ describe Cappy::Services::Devices do
       before { device.save! }
 
       it 'returns the device' do
-        expect(subject.read(device.device_id)).to eq(device.as_json)
+        expect(subject.read(device.device_id)).to eq(device.tap(&:reload))
       end
     end
   end

@@ -7,6 +7,7 @@ module Cappy
   autoload :Errors, 'cappy/errors'
   autoload :Models, 'cappy/models'
   autoload :Services, 'cappy/services'
+  autoload :Presenters, 'cappy/presenters'
 
   VERSION = '0.0.0'
 end

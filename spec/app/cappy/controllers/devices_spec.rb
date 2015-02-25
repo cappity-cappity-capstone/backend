@@ -10,6 +10,7 @@ describe Cappy::Controllers::Devices do
     let(:device_one) { build(:lock) }
     let(:device_two) { build(:gas_valve) }
     let(:devices) { [device_one, device_two].sort_by(&:id)  }
+    let(:expected) { devices.map { |d| { device: d }.as_json } }
 
     before { devices.each(&:save!) }
 
@@ -18,7 +19,7 @@ describe Cappy::Controllers::Devices do
 
       expect(last_response.status).to eq(200)
       expect(last_response.headers['Content-Type']).to eq('application/json')
-      expect(JSON.parse(last_response.body).sort_by { |hash| hash['id'] }).to eq(devices.as_json)
+      expect(JSON.parse(last_response.body).sort_by { |hash| hash['device']['id'] }).to eq(expected)
     end
   end
 
@@ -53,7 +54,7 @@ describe Cappy::Controllers::Devices do
           post '/devices/', json
 
           expect(last_response.status).to eq(201)
-          expect(JSON.parse(last_response.body)['device_id']).to eq(device.device_id)
+          expect(JSON.parse(last_response.body)['device']['device_id']).to eq(device.device_id)
         end
       end
     end
@@ -77,7 +78,7 @@ describe Cappy::Controllers::Devices do
         get "/devices/#{device.device_id}/"
 
         expect(last_response.status).to eq(200)
-        expect(JSON.parse(last_response.body)).to eq(device.as_json)
+        expect(JSON.parse(last_response.body)).to eq('device' => device.as_json)
       end
     end
   end
