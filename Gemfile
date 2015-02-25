@@ -10,6 +10,8 @@ gem 'sinatra-activerecord', '~> 2.0.4'
 gem 'resque', '~> 1.25.2'
 gem 'clockwork', '~> 1.1.0'
 gem 'UPnP', '~> 1.2.0'
+gem 'excon'
+gem 'macaddr'
 
 group :development, :test do
   gem 'rspec', '~> 3.1.0'
