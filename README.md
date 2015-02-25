@@ -112,12 +112,16 @@ A schedule is tied to a device.  It begins at a given start time (can be now), a
 
 > POST /devices
 
+```
+curl -d '{"device_id":"1", "device_type":"outlet", "name": "Toaster"}' -X POST -H "Content-Type: application/json" http://ccs.cappitycappitycapstone.com/api/devices
+```
+
 #### Body
 
     {
       "device_id": "#{device_id}",
-      "type": one of DeviceType,
-      "unit": "g/cm3"
+      "device_type": one of DeviceType,
+      "name": "Toaster Oven"
     }
 
 #### Responses
