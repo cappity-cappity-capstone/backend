@@ -29,7 +29,7 @@ end
 
 desc 'Swaps redis with the container name'
 task configure_redis: :app_environment do
-  ENV['REDIS_HOST'] = 'localhost'
+  ENV['REDIS_HOST'] ||= 'localhost'
   Resque.redis = Redis.new(host: ENV['REDIS_HOST'])
 end
 
@@ -57,6 +57,7 @@ end
 
 desc 'Run the Resque queue worker'
 task resque: :environment do
+  Resque.logger.formatter = Resque::VeryVerboseFormatter.new
   # Queue to work and 1.0 interval when checking queue
   Resque::Worker.new('cappy').work(1.0)
 end

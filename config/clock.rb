@@ -4,5 +4,5 @@ module Clockwork
   end
 
   # Sample
-  #every 5.seconds, Cappy::Services::Broadcast
+  every 10.seconds, Cappy::Services::Broadcast
 end
