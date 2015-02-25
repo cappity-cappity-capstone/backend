@@ -7,22 +7,30 @@ module Cappy
 
       get '/devices/?' do
         status 200
-        Services::Devices.list.to_json
+        Services::Devices.list.map do |device|
+          Presenters::Device.new(device).present
+        end.to_json
       end
 
       post '/devices/?' do
         status 201
-        Services::Devices.create(parse_json(req_body)).to_json
+        Presenters::Device.new(
+          Services::Devices.create(parse_json(req_body))
+        ).present.to_json
       end
 
       get '/devices/:device_id/?' do |device_id|
         status 200
-        Services::Devices.read(device_id).to_json
+        Presenters::Device.new(
+          Services::Devices.read(device_id)
+        ).present.to_json
       end
 
       put '/devices/:device_id/?' do |device_id|
         status 200
-        Services::Devices.update(device_id, parse_json(req_body)).to_json
+        Presenters::Device.new(
+          Services::Devices.update(device_id, parse_json(req_body))
+        ).present.to_json
       end
 
       delete '/devices/:device_id/?' do |device_id|
@@ -34,7 +42,9 @@ module Cappy
 
       put '/devices/:device_id/watchdog/?' do |device_id|
         status 200
-        Services::Devices.update(device_id, last_check_in: Time.now.utc)
+        Presenters::Device.new(
+          Services::Devices.update(device_id, last_check_in: Time.now.utc)
+        ).present.to_json
       end
     end
   end

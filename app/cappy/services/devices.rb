@@ -10,7 +10,7 @@ module Cappy
       module_function
 
       def list
-        Models::Device.all.map(&:as_json)
+        Models::Device.all
       end
 
       def create(data)
@@ -22,13 +22,14 @@ module Cappy
       end
 
       def read(device_id)
-        get_device(device_id).as_json
+        get_device(device_id)
       end
 
       def update(device_id, data)
         wrap_active_record_errors do
-          device = get_device(device_id)
-          device.update_attributes!(data)
+          get_device(device_id).tap do |device|
+            device.update_attributes!(data)
+          end
         end
       end
 
