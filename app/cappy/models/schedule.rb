@@ -1,10 +1,10 @@
 module Cappy
   module Models
-    # This model represents a schedule for a device
+    # This model represents a schedule for a task
     class Schedule < ActiveRecord::Base
       self.table_name = 'schedules'
 
-      belongs_to :device
+      belongs_to :task
 
       validates :start_time, presence: true
       validates :interval, presence: true
