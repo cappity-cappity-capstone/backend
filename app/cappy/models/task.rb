@@ -5,6 +5,7 @@ module Cappy
       self.table_name = 'tasks'
 
       belongs_to :device
+      has_many :schedules
 
       validates :state, presence: true
     end

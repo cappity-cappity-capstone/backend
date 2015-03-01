@@ -6,7 +6,8 @@ module Cappy
       VALID_DEVICE_TYPES = %w(lock outlet gas_valve airbourne_alert)
 
       has_many :states
-      has_many :schedules
+      has_many :tasks
+      has_many :schedules, through: :tasks
 
       validates :device_id, presence: true
       validates :name, presence: true
