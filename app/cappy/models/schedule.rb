@@ -15,6 +15,10 @@ module Cappy
           hash['end_time'] = end_time.utc.iso8601 if end_time.present?
         end
       end
+
+      def self.not_expired(time)
+        where('end_time > ? OR end_time IS NULL', time)
+      end
     end
   end
 end
