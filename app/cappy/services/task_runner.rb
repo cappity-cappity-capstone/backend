@@ -14,7 +14,7 @@ module Cappy
         tasks(previous.created_at, now.created_at).each do |task|
           task.device.states << Models::State.create(
             state: task.state,
-            source: 'scheduled'
+            source: Cappy::Models::State::SCHEDULED
           )
         end
       end
