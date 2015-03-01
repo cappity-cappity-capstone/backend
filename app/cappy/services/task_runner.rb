@@ -22,20 +22,20 @@ module Cappy
       def tasks(last_task_time, this_task_time)
         unique_tasks = Set.new
 
-        Models::Schedule.all.each do |schedule|
-          unique_task << schedule_within_time_range?(schedule, last_task_time, this_task_time)
+        Models::Schedule.not_expired(this_task_time).each do |schedule|
+          unique_tasks << schedule_within_time_range?(schedule, last_task_time, this_task_time)
         end
 
-        unique_tasks.compat
+        unique_tasks.to_a.compact
       end
 
       def schedule_within_time_range?(schedule, last_time, this_time)
         if schedule.interval > 0
           last_multiple = multiple_for_time_and_schedule(last_time, schedule)
           this_multiple = multiple_for_time_and_schedule(this_time, schedule)
-          schedule.task if last_multiple < this_multiple
+          schedule.task if last_multiple < this_multiple && this_multiple >= 0
         else
-          if last_task_time < schedule.start_time && schedule.start_time < this_task_time
+          if last_time < schedule.start_time && schedule.start_time <= this_time
             schedule.task
           end
         end
