@@ -8,6 +8,12 @@ module Cappy
       has_many :schedules
 
       validates :state, presence: true
+
+      def as_json(*args)
+        super.dup.tap do |hash|
+          hash['state'] = state.to_s('F')
+        end
+      end
     end
   end
 end

@@ -7,6 +7,7 @@ module Cappy
     autoload :States, 'cappy/controllers/states'
     autoload :Broadcast, 'cappy/controllers/broadcast'
     autoload :Schedules, 'cappy/controllers/schedules'
+    autoload :Tasks, 'cappy/controllers/tasks'
     autoload :Version, 'cappy/controllers/version'
   end
 end
