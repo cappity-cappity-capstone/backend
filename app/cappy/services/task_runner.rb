@@ -1,7 +1,7 @@
 module Cappy
   module Services
-    # This module handles performing tasks when they need to be performed
-    module Tasks
+    # This module handles running tasks when they need to be performed
+    module TaskRunner
       @queue = :cappy
 
       module_function
