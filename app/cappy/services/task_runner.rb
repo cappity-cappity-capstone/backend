@@ -23,20 +23,26 @@ module Cappy
         unique_tasks = Set.new
 
         Models::Schedule.all.each do |schedule|
-          if schedule.interval > 0
-            last_interval_multiple = ((last_task_time - schedule.start_time) / schedule.interval).floor
-            this_interval_multiple = ((this_task_time - schedule.start_time) / schedule.interval).floor
-            if last_interval_multiple < this_interval_multiple
-              unique_tasks << schedule.task
-            end
-          else
-            if last_task_time < schedule.start_time && schedule.start_time < this_task_time
-              unique_tasks << schedule.task
-            end
-          end
+          unique_task << schedule_within_time_range?(schedule, last_task_time, this_task_time)
         end
 
-        unique_tasks
+        unique_tasks.compat
+      end
+
+      def schedule_within_time_range?(schedule, last_time, this_time)
+        if schedule.interval > 0
+          last_multiple = multiple_for_time_and_schedule(last_time, schedule)
+          this_multiple = multiple_for_time_and_schedule(this_time, schedule)
+          schedule.task if last_multiple < this_multiple
+        else
+          if last_task_time < schedule.start_time && schedule.start_time < this_task_time
+            schedule.task
+          end
+        end
+      end
+
+      def multiple_for_time_and_schedule(time, schedule)
+        ((time - schedule.start_time) / schedule.interval).floor
       end
 
       def last_completed
