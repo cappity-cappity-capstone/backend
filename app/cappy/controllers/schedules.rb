@@ -12,10 +12,15 @@ module Cappy
         Services::Schedules.for_device(device_id).to_json
       end
 
-      post '/schedules/:device_id/?' do |device_id|
+      get '/tasks/:task_id/schedules/?' do |task_id|
+        status 200
+        Services::Schedules.for_task(task_id).to_json
+      end
+
+      post '/schedules/:task_id/?' do |task_id|
         status 201
-        device = Services::Devices.get_device(device_id)
-        Services::Schedules.create(device, parse_json(req_body)).to_json
+        task = Services::Tasks.get_task(task_id)
+        Services::Schedules.create(task, parse_json(req_body)).to_json
       end
 
       get '/schedules/:schedule_id/?' do |schedule_id|
