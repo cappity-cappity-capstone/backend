@@ -1,10 +1,10 @@
 module Cappy
   module Models
-    # This model represents a schedule for a device
+    # This model represents a schedule for a task
     class Schedule < ActiveRecord::Base
       self.table_name = 'schedules'
 
-      belongs_to :device
+      belongs_to :task
 
       validates :start_time, presence: true
       validates :interval, presence: true
@@ -14,6 +14,10 @@ module Cappy
           hash['start_time'] = start_time.utc.iso8601 if start_time.present?
           hash['end_time'] = end_time.utc.iso8601 if end_time.present?
         end
+      end
+
+      def self.not_expired(time)
+        where('end_time > ? OR end_time IS NULL', time)
       end
     end
   end

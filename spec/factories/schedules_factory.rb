@@ -4,6 +4,10 @@ FactoryGirl.define do
       start_time { Time.now }
     end
 
+    trait :minutely do
+      interval 60
+    end
+
     trait :hourly do
       interval 60 * 60
     end
@@ -14,7 +18,6 @@ FactoryGirl.define do
 
     factory :schedule_ends_immediately do
       start_time { Time.now }
-      end_time { start_time }
       interval 0
     end
   end

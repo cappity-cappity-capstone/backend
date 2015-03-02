@@ -1,5 +1,6 @@
 $LOAD_PATH << File.expand_path('app', '.')
 ENV['APP_ENV'] ||= 'test'
+ENV['RACK_ENV'] ||= ENV['APP_ENV']
 
 Bundler.require(:default, ENV['APP_ENV'].to_sym)
 

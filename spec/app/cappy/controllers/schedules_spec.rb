@@ -4,12 +4,13 @@ describe Cappy::Controllers::Schedules do
   include Rack::Test::Methods
 
   let(:app) { described_class.new }
-  let(:device_one) { create(:lock) }
-  let(:device_two) { create(:outlet) }
+  let(:device) { create(:lock) }
+  let(:task_one) { create(:task, device: device) }
+  let(:task_two) { create(:task, device: device) }
 
   describe 'GET /schedules/' do
-    let(:schedule_one) { build(:schedule_ends_immediately, :hourly, device: device_one) }
-    let(:schedule_two) { build(:schedule_forever_from_now, :hourly, device: device_two) }
+    let(:schedule_one) { build(:schedule_ends_immediately, :hourly, task: task_one) }
+    let(:schedule_two) { build(:schedule_forever_from_now, :hourly, task: task_two) }
     let(:schedules) { [schedule_one, schedule_two].sort_by(&:id) }
 
     before { schedules.each(&:save!) }
@@ -24,15 +25,15 @@ describe Cappy::Controllers::Schedules do
     end
   end
 
-  describe 'GET /devices/DEVICE_ID/schedules/' do
-    let(:schedule_one) { build(:schedule_ends_immediately, :hourly, device: device_one) }
-    let(:schedule_two) { build(:schedule_forever_from_now, :hourly, device: device_two) }
+  describe 'GET /tasks/TASK_ID/schedules/' do
+    let(:schedule_one) { build(:schedule_ends_immediately, :hourly, task: task_one) }
+    let(:schedule_two) { build(:schedule_forever_from_now, :hourly, task: task_two) }
     let(:schedules) { [schedule_one, schedule_two].sort_by(&:id) }
 
     before { schedules.each(&:save!) }
 
     it 'returns a list of every schedule' do
-      get "/devices/#{device_one.device_id}/schedules/"
+      get "/tasks/#{task_one.id}/schedules/"
 
       expect(last_response.status).to eq(200)
       expect(last_response.headers['Content-Type']).to eq('application/json')
@@ -40,12 +41,12 @@ describe Cappy::Controllers::Schedules do
     end
   end
 
-  describe 'POST /schedules/DEVICE_ID' do
+  describe 'POST /schedules/TASK_ID' do
     context 'when invalid data is POSTed' do
       let(:hash) { { goo_goo: 'ga_ga' } }
 
       it 'returns a "400 Client Error"' do
-        post "/schedules/#{device_one.device_id}/", hash.to_json
+        post "/schedules/#{task_one.id}/", hash.to_json
 
         expect(last_response.status).to eq(400)
       end
@@ -57,11 +58,11 @@ describe Cappy::Controllers::Schedules do
       let(:body) { JSON.parse(last_response.body) }
 
       it 'returns a "201 Created"' do
-        post "/schedules/#{device_one.device_id}/", json
+        post "/schedules/#{task_one.id}/", json
 
         expect(last_response.status).to eq(201)
         expect(body['start_time']).to eq(schedule.start_time.utc.iso8601)
-        expect(body['device_id']).to eq(device_one.id)
+        expect(body['id']).to eq(task_one.id)
       end
     end
   end
@@ -76,7 +77,7 @@ describe Cappy::Controllers::Schedules do
     end
 
     context 'when the SCHEDULE_ID exists' do
-      let(:schedule) { build(:schedule_ends_immediately, device: device_one) }
+      let(:schedule) { build(:schedule_ends_immediately, task: task_one) }
 
       before { schedule.save! }
 
@@ -99,7 +100,7 @@ describe Cappy::Controllers::Schedules do
     end
 
     context 'when the SCHEDULE_ID exists' do
-      let(:schedule) { build(:schedule_ends_immediately, device: device_one) }
+      let(:schedule) { build(:schedule_ends_immediately, task: task_one) }
 
       before { schedule.save! }
 
@@ -131,7 +132,7 @@ describe Cappy::Controllers::Schedules do
     end
 
     context 'when the SCHEDULE_ID exists' do
-      let(:schedule) { create(:schedule_ends_immediately, device: device_one) }
+      let(:schedule) { create(:schedule_ends_immediately, task: task_one) }
       let(:schedule_id) { schedule.id }
 
       it 'deletes that schedule' do

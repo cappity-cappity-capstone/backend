@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207093600) do
+ActiveRecord::Schema.define(version: 20150228210433) do
 
   create_table "devices", force: :cascade do |t|
     t.string   "device_id",     null: false
@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 20150207093600) do
   add_index "devices", ["device_id"], name: "index_devices_on_device_id"
 
   create_table "schedules", force: :cascade do |t|
-    t.integer  "device_id",  null: false
     t.datetime "start_time", null: false
     t.datetime "end_time"
     t.integer  "interval",   null: false
+    t.integer  "task_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -41,5 +41,15 @@ ActiveRecord::Schema.define(version: 20150207093600) do
   end
 
   add_index "states", ["device_id"], name: "index_states_on_device_id"
+
+  create_table "task_complete", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer "device_id", null: false
+    t.decimal "state",     null: false
+  end
 
 end

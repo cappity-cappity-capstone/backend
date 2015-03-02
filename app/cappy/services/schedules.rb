@@ -1,6 +1,6 @@
 module Cappy
   module Services
-    # This service handles converting JSON data to/from database models for the
+    # This service handles converting JSON data to database models for the
     # schedules table. Also, database level errors are wrapped into application-
     # specific errors to make better use of HTTP errors codes in each
     # controller.
@@ -10,26 +10,32 @@ module Cappy
       module_function
 
       def list
-        Models::Schedule.all.map(&:as_json)
+        Models::Schedule.all
       end
 
       def for_device(device_id = nil)
         device = Services::Devices.get_device(device_id)
-        device.schedules.all.map(&:as_json)
+        device.schedules.all
       end
 
-      def create(device, data)
-        wrap_active_record_errors { device.schedules.create!(data) }
+      def for_task(task_id = nil)
+        task = Services::Tasks.get_task(task_id)
+        task.schedules.all
+      end
+
+      def create(task, data)
+        wrap_active_record_errors { task.schedules.create!(data) }
       end
 
       def read(schedule_id)
-        get_schedule(schedule_id).as_json
+        get_schedule(schedule_id)
       end
 
       def update(schedule_id, data)
         wrap_active_record_errors do
-          schedule = get_schedule(schedule_id)
-          schedule.update_attributes!(data)
+          get_schedule(schedule_id).tap do |schedule|
+            schedule.update_attributes!(data)
+          end
         end
       end
 

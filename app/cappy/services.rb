@@ -6,5 +6,7 @@ module Cappy
     autoload :States, 'cappy/services/states'
     autoload :Broadcast, 'cappy/services/broadcast'
     autoload :Schedules, 'cappy/services/schedules'
+    autoload :Tasks, 'cappy/services/tasks'
+    autoload :TaskRunner, 'cappy/services/task_runner'
   end
 end
