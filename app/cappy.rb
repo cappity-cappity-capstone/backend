@@ -1,3 +1,4 @@
+require 'json'
 require 'socket'
 require 'set'
 Bundler.require(:default, (ENV['APP_ENV'] || 'development').to_sym)

@@ -7,6 +7,7 @@ Bundler.require(:default, ENV['APP_ENV'].to_sym)
 require 'cappy'
 
 Dir['spec/factories/**/*.rb'].each { |factory| load(factory) }
+Dir['spec/support/**/*.rb'].each { |support| load(support) }
 
 RSpec.configure do |config|
   config.include(FactoryGirl::Syntax::Methods)

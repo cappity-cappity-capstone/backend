@@ -8,5 +8,6 @@ module Cappy
     autoload :Schedules, 'cappy/services/schedules'
     autoload :Tasks, 'cappy/services/tasks'
     autoload :TaskRunner, 'cappy/services/task_runner'
+    autoload :CloudClient, 'cappy/services/cloud_client'
   end
 end
