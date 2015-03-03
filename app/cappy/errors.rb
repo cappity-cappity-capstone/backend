@@ -15,5 +15,14 @@ module Cappy
 
     # Raised when duplicated data is created.
     DuplicationError = Class.new(BaseError)
+
+    # Superclass for all cloud communication errors.
+    CloudError = Class.new(BaseError)
+
+    # Thrown when a 4xx is received from the cloud servers.
+    CloudClientError = Class.new(CloudError)
+
+    # Thrown when a 5xx is received from the cloud servers.
+    CloudServerError = Class.new(CloudError)
   end
 end

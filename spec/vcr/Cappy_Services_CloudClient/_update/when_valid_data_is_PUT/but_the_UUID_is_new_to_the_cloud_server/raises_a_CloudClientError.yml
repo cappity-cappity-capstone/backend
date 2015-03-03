@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: http://localhost:4567/auth/control_servers/NEW-UUID
+    body:
+      encoding: UTF-8
+      string: '{"port":4567}'
+    headers:
+      User-Agent:
+      - excon/0.44.3
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      Date:
+      - Tue, 03 Mar 2015 17:49:55 GMT
+      Status:
+      - 404 Not Found
+      Connection:
+      - close
+      Content-Type:
+      - text/html;charset=utf-8
+      X-Cascade:
+      - pass
+      Content-Length:
+      - '550'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: |
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style type="text/css">
+          body { text-align:center;font-family:helvetica,arial;font-size:22px;
+            color:#888;margin:20px}
+          #c {margin:0 auto;width:500px;text-align:left}
+          </style>
+        </head>
+        <body>
+          <h2>Sinatra doesn&rsquo;t know this ditty.</h2>
+          <img src='http://localhost:4567/auth/__sinatra__/404.png'>
+          <div id="c">
+            Try this:
+            <pre># in base.rb
+        class Auth::Controllers::Users
+          put &#x27;&#x2F;control_servers&#x2F;NEW-UUID&#x27; do
+            &quot;Hello World&quot;
+          end
+        end
+        </pre>
+          </div>
+        </body>
+        </html>
+    http_version: 
+  recorded_at: Tue, 03 Mar 2015 17:49:55 GMT
+recorded_with: VCR 2.9.3
