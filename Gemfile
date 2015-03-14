@@ -10,6 +10,7 @@ gem 'sinatra-activerecord', '~> 2.0.4'
 gem 'resque', '~> 1.25.2'
 gem 'clockwork', '~> 1.1.0'
 gem 'excon', '~> 0.44.3'
+gem 'rack-cors', '~> 0.3.1'
 
 group :development, :test do
   gem 'rspec', '~> 3.1.0'
