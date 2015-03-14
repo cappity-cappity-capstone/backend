@@ -6,7 +6,7 @@ FactoryGirl.define do
 
   factory :on_state, class: Cappy::Models::State do
     device
-    state 0
+    state 1
   end
 
   Cappy::Models::State::VALID_SOURCES.each do |source|

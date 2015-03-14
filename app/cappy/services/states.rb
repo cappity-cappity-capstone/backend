@@ -10,11 +10,11 @@ module Cappy
       module_function
 
       def list(device)
-        device.states.all.map(&:as_json)
+        device.states.all
       end
 
       def read(device)
-        device.states.last.as_json
+        device.states.last
       end
 
       def create(device, data)

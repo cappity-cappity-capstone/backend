@@ -18,13 +18,25 @@ describe Cappy::Controllers::States do
     context 'when the DEVICE_ID exists' do
       let(:device) { create(:lock) }
       let(:device_id) { device.device_id }
-      let!(:state) { create(:on_state, :scheduled, device: device) }
 
-      it 'reads the last state' do
-        get "/devices/#{device_id}/state/"
+      context 'when the state was on' do
+        let!(:state) { create(:on_state, :scheduled, device: device) }
 
-        expect(last_response.status).to eq(200)
-        expect(JSON.parse(last_response.body)).to eq(state.as_json)
+        it 'reads the last state' do
+          get "/devices/#{device_id}/state/"
+
+          expect(last_response.status).to eq(201)
+        end
+      end
+
+      context 'when the state was off' do
+        let!(:state) { create(:off_state, :scheduled, device: device) }
+
+        it 'reads the last state' do
+          get "/devices/#{device_id}/state/"
+
+          expect(last_response.status).to eq(200)
+        end
       end
     end
   end
