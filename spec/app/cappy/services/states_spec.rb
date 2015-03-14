@@ -11,7 +11,7 @@ describe Cappy::Services::States do
     before { states.each(&:save!) }
 
     it 'returns a list of all of the statuses' do
-      expect(subject.list(device)).to eq(states.map(&:as_json))
+      expect(subject.list(device)).to eq(states)
     end
   end
 
@@ -22,7 +22,7 @@ describe Cappy::Services::States do
     before { [state_one, state_two].each(&:save!) }
 
     it 'returns the last status' do
-      expect(subject.read(device)).to eq(state_two.as_json)
+      expect(subject.read(device)).to eq(state_two)
     end
   end
 
