@@ -49,7 +49,7 @@ module Cappy
 
       def find_control_url
         discover_devices.each do |device|
-          if location = device.match(/^Location: (.*)$/)
+          if location = device.match(/^location: (.*)$/i)
             igd_url = URI.parse(location[1].strip)
             if control_url = get_control_url(igd_url.to_s)
               return URI.parse(
@@ -62,12 +62,13 @@ module Cappy
 
       def discover_devices
         udp = UDPSocket.new
-        search_str = <<EOF
+        search_str = <<EOF.gsub(/\n/, "\r\n")
 M-SEARCH * HTTP/1.1
 Host: 239.255.255.250:1900
-Man: "ssdp:discover"
+MAN: "ssdp:discover"
 ST: upnp:rootdevice
-MX: 3
+MX: 2
+Connection: close
 EOF
         udp.send search_str, 0, "239.255.255.250", 1900
         sleep(0.5)
