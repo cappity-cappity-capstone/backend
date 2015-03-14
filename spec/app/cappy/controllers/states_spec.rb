@@ -24,6 +24,7 @@ describe Cappy::Controllers::States do
         get "/devices/#{device_id}/state/"
 
         expect(last_response.status).to eq(200)
+        expect(device.last_check_in).to eq(state.created_at)
         expect(JSON.parse(last_response.body)).to eq(state.as_json)
       end
     end

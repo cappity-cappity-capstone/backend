@@ -48,7 +48,7 @@ describe Cappy::Controllers::Devices do
 
       context 'and that device does not exist' do
         let(:device) { build(:gas_valve) }
-        let(:json) { device.to_json }
+        let(:json) { device.to_json.except('current_state') }
 
         it 'returns a "201 Created"' do
           post '/devices/', json

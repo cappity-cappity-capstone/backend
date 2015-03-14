@@ -15,7 +15,7 @@ describe Cappy::Services::Devices do
 
   describe '#create' do
     context 'when an invalid key is passed' do
-      let(:valid_hash) { build(:outlet).as_json }
+      let(:valid_hash) { build(:outlet).as_json.except('current_state') }
       let(:invalid_hash) { valid_hash.tap { |hash| hash[:test] = true } }
 
       it 'raises an error' do
@@ -25,7 +25,7 @@ describe Cappy::Services::Devices do
     end
 
     context 'when not enough keys are passed' do
-      let(:valid_hash) { build(:airbourne_alert).as_json }
+      let(:valid_hash) { build(:airbourne_alert).as_json.except('current_state') }
       let(:invalid_hash) { valid_hash.tap { |hash| hash.delete('name') } }
 
       it 'raises an error' do
@@ -35,7 +35,7 @@ describe Cappy::Services::Devices do
     end
 
     context 'when some of the keys reference invalid data' do
-      let(:valid_hash) { build(:lock).as_json }
+      let(:valid_hash) { build(:lock).as_json.except('current_state') }
       let(:invalid_hash) { valid_hash.tap { |hash| hash['device_type'] = 'LOCK' } }
 
       it 'raises an error' do
@@ -45,7 +45,7 @@ describe Cappy::Services::Devices do
     end
 
     context 'when there already exists a Device with that device id' do
-      let(:valid_hash) { build(:lock).as_json }
+      let(:valid_hash) { build(:lock).as_json.except('current_state') }
 
       before { subject.create(valid_hash) }
 
@@ -56,7 +56,7 @@ describe Cappy::Services::Devices do
     end
 
     context 'when all of the keys and values are valid' do
-      let(:valid_hash) { build(:gas_valve).as_json }
+      let(:valid_hash) { build(:gas_valve).as_json.except('current_state') }
       let(:including_hash) { valid_hash.reject { |_, v| v.nil? }.to_h }
 
       it 'adds a new device' do
