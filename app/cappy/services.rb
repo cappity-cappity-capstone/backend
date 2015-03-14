@@ -9,5 +9,6 @@ module Cappy
     autoload :Tasks, 'cappy/services/tasks'
     autoload :TaskRunner, 'cappy/services/task_runner'
     autoload :CloudClient, 'cappy/services/cloud_client'
+    autoload :OpenIgdPort, 'cappy/services/open_igd_port'
   end
 end
