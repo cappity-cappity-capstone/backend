@@ -24,7 +24,7 @@ module Cappy
             'NewRemoteHost' => '',
             'NewExternalPort' => EXTERNAL_PORT,
             'NewProtocol' => 'TCP',
-            'NewInternalPort' => 4567,
+            'NewInternalPort' => 8080,
             'NewInternalClient' => local_ip,
             'NewEnabled' => 1,
             'NewPortMappingDescription' => 'HAL CCS',
