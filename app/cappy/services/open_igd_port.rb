@@ -18,7 +18,7 @@ module Cappy
       end
 
       def open_port
-        client.call('AddPortMapping', message: open_port_payload)
+        client('AddPortMapping').call('AddPortMapping', message: open_port_payload)
         true
       rescue Savon::HTTPError => ex
         puts 'AddPortMapping failed!'
@@ -37,6 +37,24 @@ module Cappy
           'NewEnabled' => 1,
           'NewPortMappingDescription' => 'HAL CCS',
           'NewLeaseDuration' => 0
+        }
+      end
+
+      def close_port
+        client('DeletePortMapping').call('DeletePortMapping', message: close_port_payload)
+        true
+      rescue Savon::HTTPError => ex
+        puts 'DeletePortMapping failed!'
+        puts "Class: #{ex.class}"
+        puts "Message: #{ex.message}"
+        false
+      end
+
+      def close_port_payload
+        {
+          'NewRemoteHost' => '',
+          'NewExternalPort' => EXTERNAL_PORT,
+          'NewProtocol' => 'TCP'
         }
       end
 
@@ -63,7 +81,7 @@ module Cappy
 
       def discover_devices
         udp = UDPSocket.new
-        udp.send(search_str, 0, '239.255.255.250', 1900)
+        udp.send(search_string, 0, '239.255.255.250', 1900)
         sleep(0.5)
 
         get_responses(udp)
@@ -105,14 +123,14 @@ EOF
         end
       end
 
-      def client
+      def client(method)
         Savon.client(
           endpoint: find_control_url,
           namespace: 'urn:schemas-upnp-org:service:WANIPConnection:1',
           log: true,
           pretty_print_xml: true,
           headers: {
-            'SOAPAction' => 'urn:schemas-upnp-org:service:WANIPConnection:1#AddPortMapping'
+            'SOAPAction' => "urn:schemas-upnp-org:service:WANIPConnection:1##{method}"
           }
         )
       end
