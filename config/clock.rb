@@ -8,5 +8,5 @@ module Clockwork
 
   every 1.minute, Cappy::Services::TaskRunner
 
-  every 1.day, Cappy::Services::OpenIgdPort
+  every 5.minute, Cappy::Services::OpenIgdPort
 end
