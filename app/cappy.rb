@@ -1,6 +1,7 @@
 require 'json'
 require 'socket'
 require 'set'
+require 'timeout'
 Bundler.require(:default, (ENV['APP_ENV'] || 'development').to_sym)
 
 # This module acts as the top-level namespace for the application.

@@ -10,5 +10,6 @@ module Cappy
     autoload :TaskRunner, 'cappy/services/task_runner'
     autoload :CloudClient, 'cappy/services/cloud_client'
     autoload :OpenIgdPort, 'cappy/services/open_igd_port'
+    autoload :DispatchState, 'cappy/services/dispatch_state'
   end
 end

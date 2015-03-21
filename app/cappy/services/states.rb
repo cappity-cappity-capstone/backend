@@ -20,6 +20,12 @@ module Cappy
       def create(device, data)
         wrap_active_record_errors { device.states.create!(data) }
       end
+
+      def get_state(state_id)
+        Models::State.find_by(id: state_id).tap do |state|
+          fail Errors::NoSuchObject, state_id unless state
+        end
+      end
     end
   end
 end

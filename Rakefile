@@ -57,7 +57,6 @@ end
 
 desc 'Run the Resque queue worker'
 task resque: :environment do
-  Resque.logger.formatter = Resque::VeryVerboseFormatter.new
   # Queue to work and 1.0 interval when checking queue
   Resque::Worker.new('cappy').work(1.0)
 end

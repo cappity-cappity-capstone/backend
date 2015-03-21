@@ -16,7 +16,10 @@ module Cappy
       post '/devices/:device_id/state/?' do |device_id|
         status 201
         device = Services::Devices.get_device(device_id)
-        Services::States.create(device, parse_json(req_body)).to_json
+        if (state = Services::States.create(device, parse_json(req_body)))
+          Resque.enqueue(Services::DispatchState, state.id)
+          state.to_json
+        end
       end
     end
   end
