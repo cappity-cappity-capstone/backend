@@ -9,8 +9,10 @@ module Cappy
 
       module_function
 
-      def list(device)
-        device.states.all
+      def list(device, page=nil, count=nil)
+        page ||= 0
+        count ||= 15
+        device.states.order('created_at DESC').limit(count).offset(page * count)
       end
 
       def read(device)

@@ -4,12 +4,12 @@ module Cappy
     class Tasks < Base
       get '/tasks/?' do
         status 200
-        Services::Tasks.list.to_json
+        Presenters::Tasks.present(Services::Tasks.list).to_json
       end
 
       get '/devices/:device_id/tasks/?' do |device_id|
         status 200
-        Services::Tasks.for_device(device_id).to_json
+        Presenters::Tasks.present(Services::Tasks.for_device(device_id)).to_json
       end
 
       post '/tasks/:device_id/?' do |device_id|
