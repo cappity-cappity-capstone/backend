@@ -64,6 +64,13 @@ describe Cappy::Services::Tasks do
     end
   end
 
+  describe '#create_initial_tasks' do
+    let(:method) { subject.create_initial_tasks(device_one) }
+    it 'adds the two tasks for a device' do
+      expect { method }.to change { Cappy::Models::Task.count }.by(2)
+    end
+  end
+
   describe '#read' do
     context 'when there is no task with the given id' do
       it 'raises an error' do

@@ -18,7 +18,11 @@ module Cappy
           fail Errors::DuplicationError, "Device already exists with id: #{data['device_id']}"
         end
 
-        wrap_active_record_errors { Models::Device.create!(data) }
+        wrap_active_record_errors do
+          Models::Device.create!(data).tap do |device|
+            Services::Tasks.create_initial_tasks(device)
+          end
+        end
       end
 
       def read(device_id)

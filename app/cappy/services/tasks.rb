@@ -22,6 +22,11 @@ module Cappy
         wrap_active_record_errors { device.tasks.create!(data) }
       end
 
+      def create_initial_tasks(device)
+        create(device, state: 0.0)
+        create(device, state: 1.0)
+      end
+
       def read(task_id)
         get_task(task_id)
       end

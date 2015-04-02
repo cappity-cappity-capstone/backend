@@ -60,7 +60,7 @@ describe Cappy::Services::Devices do
       let(:including_hash) { valid_hash.reject { |_, v| v.nil? }.to_h }
 
       it 'adds a new device' do
-        subject.create(valid_hash)
+        expect { subject.create(valid_hash) }.to change { Cappy::Models::Task.count }.by(2)
         expect(subject.list.as_json).to match([a_hash_including(including_hash)])
       end
     end
