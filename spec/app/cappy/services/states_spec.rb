@@ -11,7 +11,7 @@ describe Cappy::Services::States do
     before { states.each(&:save!) }
 
     it 'returns a list of all of the statuses' do
-      expect(subject.list(device)).to eq(states)
+      expect(subject.list(device)).to eq(states.reverse)
     end
   end
 

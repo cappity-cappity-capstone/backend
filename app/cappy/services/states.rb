@@ -9,7 +9,7 @@ module Cappy
 
       module_function
 
-      def list(device, page=nil, count=nil)
+      def list(device, page = nil, count = nil)
         page ||= 0
         count ||= 15
         device.states.order('created_at DESC').limit(count).offset(page * count)

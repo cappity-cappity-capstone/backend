@@ -20,7 +20,7 @@ describe Cappy::Controllers::Tasks do
       expect(last_response.status).to eq(200)
       expect(last_response.headers['Content-Type']).to eq('application/json')
       expect(JSON.parse(last_response.body).sort_by { |hash| hash['id'] })
-        .to eq(tasks.map(&:as_json))
+        .to eq(tasks.map { |t| t.as_json.merge('schedules' => []) })
     end
   end
 
@@ -36,7 +36,7 @@ describe Cappy::Controllers::Tasks do
 
       expect(last_response.status).to eq(200)
       expect(last_response.headers['Content-Type']).to eq('application/json')
-      expect(JSON.parse(last_response.body)[0]).to eq(task_one.as_json)
+      expect(JSON.parse(last_response.body)[0]).to eq(task_one.as_json.merge('schedules' => []))
     end
   end
 
