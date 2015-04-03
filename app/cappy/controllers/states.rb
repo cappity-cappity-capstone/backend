@@ -10,7 +10,8 @@ module Cappy
 
       get '/devices/:device_id/state/?' do |device_id|
         device = Services::Devices.get_device(device_id)
-        if read(device).state > 0.0
+        state = read(device)
+        if state && state.state > 0.0
           status 201
           ''
         else
