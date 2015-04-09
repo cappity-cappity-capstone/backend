@@ -2,9 +2,11 @@
 #
 # Table name: triggers
 #
-#  id       :integer          not null, primary key
-#  alert_id :integer
-#  state    :boolean
+#  id         :integer          not null, primary key
+#  alert_id   :integer
+#  state      :boolean          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 module Cappy

@@ -4,6 +4,7 @@ module Cappy
   module Controllers
     autoload :Base, 'cappy/controllers/base'
     autoload :Devices, 'cappy/controllers/devices'
+    autoload :Alerts, 'cappy/controllers/alerts'
     autoload :States, 'cappy/controllers/states'
     autoload :Broadcast, 'cappy/controllers/broadcast'
     autoload :Schedules, 'cappy/controllers/schedules'

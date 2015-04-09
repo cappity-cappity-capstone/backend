@@ -14,7 +14,10 @@
 ActiveRecord::Schema.define(version: 20150409200911) do
 
   create_table "alerts", force: :cascade do |t|
-    t.string "name"
+    t.string   "name",       null: false
+    t.string   "type",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "devices", force: :cascade do |t|
@@ -58,8 +61,10 @@ ActiveRecord::Schema.define(version: 20150409200911) do
   end
 
   create_table "triggers", force: :cascade do |t|
-    t.integer "alert_id"
-    t.boolean "state"
+    t.integer  "alert_id"
+    t.boolean  "state",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

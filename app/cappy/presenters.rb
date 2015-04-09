@@ -3,6 +3,7 @@ module Cappy
   module Presenters
     autoload :Base, 'cappy/presenters/base'
     autoload :Device, 'cappy/presenters/device'
+    autoload :Alert, 'cappy/presenters/alert'
     autoload :Tasks, 'cappy/presenters/tasks'
   end
 end
