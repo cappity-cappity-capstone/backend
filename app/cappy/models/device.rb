@@ -1,9 +1,26 @@
+# == Schema Information
+#
+# Table name: devices
+#
+#  id            :integer          not null, primary key
+#  device_id     :string           not null
+#  name          :string           not null
+#  device_type   :string           not null
+#  last_check_in :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  unit          :string
+#  alert_id      :integer
+#
+
 module Cappy
   module Models
     # This model represents a connected device
     class Device < ActiveRecord::Base
       self.table_name = 'devices'
       VALID_DEVICE_TYPES = %w(lock outlet gas_valve airbourne_alert)
+
+      belongs_to :alert
 
       has_many :states
       has_many :tasks

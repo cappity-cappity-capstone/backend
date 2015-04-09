@@ -13,6 +13,7 @@ gem 'excon', '~> 0.44.3'
 gem 'savon', '~> 2.10.0'
 
 group :development, :test do
+  gem 'annotate'
   gem 'rspec', '~> 3.1.0'
   gem 'rubocop', '~> 0.28.0'
   gem 'rack-test', '~> 0.6.3'

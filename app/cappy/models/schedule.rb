@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: schedules
+#
+#  id         :integer          not null, primary key
+#  start_time :datetime         not null
+#  end_time   :datetime
+#  interval   :integer          not null
+#  task_id    :integer
+#
+
 module Cappy
   module Models
     # This model represents a schedule for a task

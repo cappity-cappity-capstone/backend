@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: task_complete
+#
+#  id         :integer          not null, primary key
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 module Cappy
   module Models
     # Maintains the record of the last time tasks were run
