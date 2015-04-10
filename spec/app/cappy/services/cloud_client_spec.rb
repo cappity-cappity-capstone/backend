@@ -4,17 +4,21 @@ require 'spec_helper'
 # empty database on port 4567.
 describe Cappy::Services::CloudClient do
   let(:host) { 'http://localhost:4567' }
-  subject { described_class.new(host) }
-
   let(:uuid) { 'SOME-UUID' }
+
   let(:port) { 4567 }
+
+  before do
+    stub_const('Cappy::CLOUD_CLIENT_HOST', host)
+    stub_const('Cappy::CLOUD_CLIENT_UUID', uuid)
+  end
 
   describe '#create' do
     context 'when an invalid UUID or port is POSTed' do
       let(:uuid) { nil }
 
       it 'raises a CloudClientError', :vcr do
-        expect { subject.create(uuid, port) }
+        expect { subject.create(port) }
           .to raise_error(Cappy::Errors::CloudClientError)
       end
     end
@@ -23,10 +27,10 @@ describe Cappy::Services::CloudClient do
       context 'but the control server has already been created in the cloud' do
         let(:uuid) { 'DUPLICATED-UUID' }
 
-        before { subject.create(uuid, port) }
+        before { subject.create(port) }
 
         it 'raises a CloudClientError', :vcr do
-          expect { subject.create(uuid, port) }
+          expect { subject.create(port) }
             .to raise_error(Cappy::Errors::CloudClientError)
         end
       end
@@ -35,7 +39,7 @@ describe Cappy::Services::CloudClient do
         let(:expected) { { 'uuid' => uuid, 'port' => port } }
 
         it 'returns the parsed JSON response', :vcr do
-          expect(subject.create(uuid, port)).to match(a_hash_including(expected))
+          expect(subject.create(port)).to match(a_hash_including(expected))
         end
       end
     end
@@ -46,7 +50,7 @@ describe Cappy::Services::CloudClient do
       let(:port) { nil }
 
       it 'raises a CloudClientError', :vcr do
-        expect { subject.update(uuid, port) }
+        expect { subject.update(port) }
           .to raise_error(Cappy::Errors::CloudClientError)
       end
     end
@@ -56,7 +60,7 @@ describe Cappy::Services::CloudClient do
         let(:uuid) { 'NEW-UUID' }
 
         it 'raises a CloudClientError', :vcr do
-          expect { subject.update(uuid, port) }
+          expect { subject.update(port) }
             .to raise_error(Cappy::Errors::CloudClientError)
         end
       end
@@ -65,7 +69,7 @@ describe Cappy::Services::CloudClient do
         let(:expected) { { 'port' => port, 'uuid' => uuid } }
 
         it 'returns the parsed JSON response', :vcr do
-          expect(subject.update(uuid, port)).to match(a_hash_including(expected))
+          expect(subject.update(port)).to match(a_hash_including(expected))
         end
       end
     end
