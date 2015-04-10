@@ -20,7 +20,7 @@ module Cappy
         wrap_active_record_errors do
           last_trigger = read(alert)
 
-          if last_trigger.nil? || last_trigger.state != data["state"]
+          if last_trigger.nil? || last_trigger.state != data['state']
             alert.triggers.create!(data).tap do |trigger|
               trigger_device_reaction(trigger) if trigger.state
             end

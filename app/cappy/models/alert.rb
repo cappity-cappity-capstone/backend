@@ -11,8 +11,12 @@
 
 module Cappy
   module Models
+    # A type of device that sends triggers
     class Alert < ActiveRecord::Base
       self.table_name = 'alerts'
+      # Definitely wouldn't ever use this name as a column
+      self.inheritance_column = 'zoink'
+
       VALID_ALERT_TYPES = %w(airbourne_alert)
 
       validates :name, presence: true

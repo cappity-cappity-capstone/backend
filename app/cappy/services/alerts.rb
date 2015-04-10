@@ -46,17 +46,14 @@ module Cappy
         when 'airbourne_alert'
           Models::Device.where(device_type: 'gas_valve').each do |device|
             device.alert = alert
-            device.save
+            device.save!
           end
         end
       end
 
       def turn_off_devices(alert)
         alert.devices.each do |device|
-          Services::States.create(device, {
-            'state' => 0.0,
-            'source' => Models::State::ALERT
-          })
+          Services::States.create(device, 'state' => 0.0, 'source' => Models::State::ALERT)
         end
       end
     end

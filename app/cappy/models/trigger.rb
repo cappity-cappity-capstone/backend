@@ -11,6 +11,7 @@
 
 module Cappy
   module Models
+    # The state of the alert device (on/off)
     class Trigger < ActiveRecord::Base
       self.table_name = 'triggers'
 
