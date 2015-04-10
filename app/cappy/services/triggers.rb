@@ -18,12 +18,21 @@ module Cappy
 
       def create(alert, data)
         wrap_active_record_errors do
-          trigger = read(alert)
+          last_trigger = read(alert)
 
-          if trigger.nil? || trigger.state != data["state"]
-            alert.triggers.create!(data)
+          if last_trigger.nil? || last_trigger.state != data["state"]
+            alert.triggers.create!(data).tap do |trigger|
+              trigger_device_reaction(trigger) if trigger.state
+            end
           end
         end
+      end
+
+      def trigger_device_reaction(trigger)
+        alert = trigger.alert
+
+        Services::CloudClient.send_alert_email(alert)
+        Services::Alerts.turn_off_devices(alert)
       end
     end
   end

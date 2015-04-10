@@ -50,6 +50,15 @@ module Cappy
           end
         end
       end
+
+      def turn_off_devices(alert)
+        alert.devices.each do |device|
+          Services::States.create(device, {
+            'state' => 0.0,
+            'source' => Models::State::ALERT
+          })
+        end
+      end
     end
   end
 end

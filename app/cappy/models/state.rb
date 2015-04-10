@@ -18,8 +18,9 @@ module Cappy
       SCHEDULED = 'scheduled'
       PARENT_LEFT = 'parent_left'
       MANUAL_OVERRIDE = 'manual_override'
+      ALERT = 'alert'
 
-      VALID_SOURCES = [SCHEDULED, PARENT_LEFT, MANUAL_OVERRIDE]
+      VALID_SOURCES = [SCHEDULED, PARENT_LEFT, MANUAL_OVERRIDE, ALERT]
 
       belongs_to :device
 
