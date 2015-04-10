@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id        :integer          not null, primary key
+#  device_id :integer          not null
+#  state     :decimal(, )      not null
+#
+
 module Cappy
   module Models
     # This model represents a task for a device

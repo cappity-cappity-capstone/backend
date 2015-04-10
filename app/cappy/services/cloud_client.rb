@@ -29,6 +29,14 @@ module Cappy
         )
       end
 
+      def send_alert_email(alert)
+        request(
+          method: 'POST',
+          path: File.join(ROOT_PATH, uuid, 'alert'),
+          body: { alert: alert.as_json }
+        )
+      end
+
       private
 
       def request(*args, &block)

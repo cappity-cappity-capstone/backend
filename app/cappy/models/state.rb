@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: states
+#
+#  id         :integer          not null, primary key
+#  device_id  :integer          not null
+#  state      :decimal(, )      not null
+#  source     :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 module Cappy
   module Models
     # This model represents the state of a connected device
@@ -6,8 +18,9 @@ module Cappy
       SCHEDULED = 'scheduled'
       PARENT_LEFT = 'parent_left'
       MANUAL_OVERRIDE = 'manual_override'
+      ALERT = 'alert'
 
-      VALID_SOURCES = [SCHEDULED, PARENT_LEFT, MANUAL_OVERRIDE]
+      VALID_SOURCES = [SCHEDULED, PARENT_LEFT, MANUAL_OVERRIDE, ALERT]
 
       belongs_to :device
 
