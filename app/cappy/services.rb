@@ -3,7 +3,9 @@ module Cappy
   module Services
     autoload :Base, 'cappy/services/base'
     autoload :Devices, 'cappy/services/devices'
+    autoload :Alerts, 'cappy/services/alerts'
     autoload :States, 'cappy/services/states'
+    autoload :Triggers, 'cappy/services/triggers'
     autoload :Broadcast, 'cappy/services/broadcast'
     autoload :Schedules, 'cappy/services/schedules'
     autoload :Tasks, 'cappy/services/tasks'

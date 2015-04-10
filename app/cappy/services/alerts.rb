@@ -12,7 +12,7 @@ module Cappy
 
       def create(data)
         wrap_active_record_errors do
-          Models::Alerts.create(data).tap do |alert|
+          Models::Alert.create(data).tap do |alert|
             provision_for_default_devices(alert)
           end
         end
