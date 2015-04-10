@@ -3,17 +3,15 @@ module Cappy
     # Opens a port using the IGD service running on the router
     module OpenIgdPort
       @queue = :cappy
-      CLOUD_CLIENT_HOST = ENV['CLOUD_CLIENT_HOST'] || 'http://cappitycappitycapstone.com'
-      CLOUD_CLIENT_UUID = ENV['CLOUD_CLIENT_UUID'] || 'development'
       EXTERNAL_PORT = 10_901
 
       module_function
 
       def perform
         begin
-          cloud_client.create(CLOUD_CLIENT_UUID, EXTERNAL_PORT)
+          CloudClient.create(EXTERNAL_PORT)
         rescue Errors::CloudClientError
-          cloud_client.update(CLOUD_CLIENT_UUID, EXTERNAL_PORT)
+          CloudClient.update(EXTERNAL_PORT)
         end if open_port
       end
 
@@ -133,10 +131,6 @@ EOF
             'SOAPAction' => "urn:schemas-upnp-org:service:WANIPConnection:1##{method}"
           }
         )
-      end
-
-      def cloud_client
-        CloudClient.new(CLOUD_CLIENT_HOST)
       end
     end
   end

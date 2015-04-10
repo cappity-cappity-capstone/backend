@@ -3,7 +3,7 @@ require 'socket'
 require 'set'
 Bundler.require(:default, (ENV['APP_ENV'] || 'development').to_sym)
 
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+require 'cappy/initializers'
 
 # This module acts as the top-level namespace for the application.
 module Cappy

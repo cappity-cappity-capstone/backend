@@ -1,30 +1,25 @@
 module Cappy
   module Services
     # This class handles communication with the cloud servers.
-    class CloudClient
+    module CloudClient
       ROOT_PATH = '/auth/control_servers/'.freeze
 
-      attr_reader :host
-
-      # Initialize the client with a Host.
-      def initialize(host)
-        @host = host
-      end
+      module_function
 
       # Create a control_server in the cloud.
-      def create(uuid, port)
+      def create(port)
         request(
           method: 'POST',
           path: ROOT_PATH,
-          body: { uuid: uuid, port: port }.to_json
+          body: { uuid: CLOUD_CLIENT_UUID, port: port }.to_json
         )
       end
 
       # Update the port for the given UUID.
-      def update(uuid, port)
+      def update(port)
         request(
           method: 'PUT',
-          path: File.join(ROOT_PATH, uuid),
+          path: File.join(ROOT_PATH, CLOUD_CLIENT_UUID),
           body: { port: port }.to_json
         )
       end
@@ -32,12 +27,10 @@ module Cappy
       def send_alert_email(alert)
         request(
           method: 'POST',
-          path: File.join(ROOT_PATH, uuid, 'alert'),
-          body: { alert: alert.as_json }
+          path: File.join(ROOT_PATH, CLOUD_CLIENT_UUID, 'alert'),
+          body: { alert: alert.as_json }.to_json
         )
       end
-
-      private
 
       def request(*args, &block)
         response = connection.request(*args, &block)
@@ -58,7 +51,7 @@ module Cappy
       end
 
       def connection
-        @connection ||= Excon.new(host)
+        @connection ||= Excon.new(CLOUD_CLIENT_HOST)
       end
     end
   end
