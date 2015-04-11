@@ -35,7 +35,7 @@ module Cappy
       end
 
       def get_alert(alert_id)
-        Models::Alert.find_by(id: alert_id).tap do |alert|
+        Models::Alert.find_by(alert_id: alert_id).tap do |alert|
           fail Errors::NoSuchObject, alert_id unless alert
         end
       end
