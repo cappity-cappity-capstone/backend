@@ -11,6 +11,10 @@ module Cappy
       end
 
       def create(data)
+        if Models::Alert.exists?(alert_id: data['alert_id'])
+          fail Errors::DuplicationError, "Alert already exists with id: #{data['alert_id']}"
+        end
+
         wrap_active_record_errors do
           Models::Alert.create(data).tap do |alert|
             provision_for_default_devices(alert)
