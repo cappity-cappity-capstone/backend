@@ -4,7 +4,7 @@ module Cappy
     class Alerts < Base
       get '/alerts/?' do
         status 200
-        Service::Alerts.list.map do |alert|
+        Services::Alerts.list.map do |alert|
           Presenters::Alert.present(alert)
         end.to_json
       end
