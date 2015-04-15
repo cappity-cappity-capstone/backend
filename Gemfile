@@ -21,6 +21,10 @@ group :development, :test do
   gem 'factory_girl', '~> 4.5.0'
 end
 
+group :production do
+  gem 'mysql2', '~> 0.3.18'
+end
+
 group :test do
   gem 'fakeredis', '~> 0.5.0'
   gem 'vcr', '~> 2.9.3'

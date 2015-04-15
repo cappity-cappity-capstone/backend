@@ -7,8 +7,6 @@ class CreateStates < ActiveRecord::Migration
       t.timestamps            null: false
 
       t.index :device_id
-
-      add_foreign_key :device_id, :devices
     end
   end
 end

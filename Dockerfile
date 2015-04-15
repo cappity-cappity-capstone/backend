@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 
 # Install system dependencies
 RUN apt-get -y update
-RUN apt-get -y install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev wget libsqlite3-dev mysql-client git
+RUN apt-get -y install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev wget libsqlite3-dev libmysqlclient-dev git
 
 # Download ruby 2.1.5
 WORKDIR /tmp/
